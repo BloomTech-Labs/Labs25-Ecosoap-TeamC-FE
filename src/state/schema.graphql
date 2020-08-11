@@ -1,0 +1,375 @@
+directive @cacheControl(
+  maxAge: Int
+  scope: CacheControlScope
+) on FIELD_DEFINITION | OBJECT | INTERFACE
+# Response payload for `mutation register` and `mutation logIn` containing a JSON web token.
+type AuthPayload {
+  token: String
+  user: User
+}
+
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+# Coordinates in [ISO 6709
+# format](https://en.wikipedia.org/wiki/ISO_6709#String_expression_(Annex_H)) with
+# just latitude and longitude.
+type Coordinates {
+  latitude: Float!
+  longitude: Float!
+}
+
+# Input for `type Coordinates`.
+input CoordinatesInput {
+  latitude: Float!
+  longitude: Float!
+}
+
+# Input for `mutation createRecord`.
+input CreateRecordInput {
+  # The name for this record.
+  name: String!
+  # The ID of the type of this record.
+  typeId: ID!
+  # The location associated with this record, as coordinates.
+  coordinates: CoordinatesInput!
+  # The fields for this record.
+  fields: [FieldInput]!
+}
+
+# Response payload for `mutation createRecord`.
+type CreateRecordPayload {
+  # The created record object.
+  record: Record
+}
+
+# Input for `mutation createType`.
+input CreateTypeInput {
+  # The name for this type.
+  name: String!
+  # The fields for this type.
+  fields: [FieldInput!]!
+}
+
+# Response payload for `mutation createType`.
+type CreateTypePayload {
+  # The created type object.
+  type: Type
+}
+
+# Input for `mutation deleteRecord`.
+input DeleteRecordInput {
+  # The ID of the record to delete.
+  id: ID!
+}
+
+# Response payload for `mutation deleteRecord`.
+type DeleteRecordPayload {
+  # The deleted record object.
+  record: Record
+}
+
+# Input for `mutation deleteType`.
+input DeleteTypeInput {
+  # The ID of the type to delete.
+  id: ID!
+}
+
+# Response payload for `mutation deleteType`.
+type DeleteTypePayload {
+  # The deleted type object.
+  type: Type
+}
+
+# Input for `mutation deleteUser`.
+input DeleteUserInput {
+  email: String!
+}
+
+# Response payload for `mutation deleteUser`.
+type DeleteUserPayload {
+  user: User
+}
+
+# A `field` is an attribute of a `record` with a name and a value.
+#
+# &ZeroWidthSpace;
+#
+# For example, for the `type` "Hub", there might be a `record` called "Eco-Soap
+# Bank Rwanda". That `record` might then have the following fields:
+#
+# &ZeroWidthSpace;
+#
+# ```javascript
+# [{
+#   id: "01001",
+#   name: "Implementation Partner",
+#   value: "Hope Shines, Inc."
+# }
+, {
+#   id: "01001",
+#   name: "Women Employed",
+#   value: "6"
+# }
+]
+# ```
+#
+# &ZeroWidthSpace;
+#
+# When creating or updating a `Type`, the `fields` property defines a template for
+# records to implement, including default values (if any).
+#
+# &ZeroWidthSpace;
+#
+# When creating or updating a `Record`, the `fields` property defines the actual name and value (if any) for that record.
+type Field {
+  id: ID!
+  name: String!
+  value: String
+  # The record associated with this field.
+  record: Record
+}
+
+# Input for `fieldById`.
+input FieldByIdInput {
+  fieldId: ID!
+}
+
+# Input for `type Field`.
+input FieldInput {
+  # The name for this field.
+  name: String!
+  # If creating or updating a `Type`, the default value for this field (if any) for records of that type.
+  #
+  # If creating or updating a `Record`, the value for this field (if any) for that record.
+  value: String
+  # The ID of the record associated with this field.
+  recordId: ID
+}
+
+# Input for `mutation logIn`.
+input LogInInput {
+  email: String!
+  password: String!
+}
+
+# Mutation Root
+# ------------------------------------------------------------------------------
+type Mutation {
+  # Register a new administrator user.
+  register(input: RegisterInput): AuthPayload
+  # Authenticate an administrator user.
+  logIn(input: LogInInput): AuthPayload
+  # Delete an administrator user.
+  deleteUser(input: DeleteUserInput): DeleteUserPayload
+  # Create a new data type.
+  createType(input: CreateTypeInput): CreateTypePayload
+  # Update an existing data type.
+  updateType(input: UpdateTypeInput): UpdateTypePayload
+  # Delete a data type.
+  deleteType(input: DeleteTypeInput): DeleteTypePayload
+  # Create a new data record.
+  createRecord(input: CreateRecordInput): CreateRecordPayload
+  # Update an existing data record.
+  updateRecord(input: UpdateRecordInput): UpdateRecordPayload
+  # Delete a data record.
+  deleteRecord(input: DeleteRecordInput): DeleteRecordPayload
+}
+
+# Query Root
+# ------------------------------------------------------------------------------
+type Query {
+  # Get all types.
+  types: [Type]
+  # Get a type by its ID.
+  typeById(input: TypeByIdInput): Type
+  # Get all records.
+  records: [Record]
+  # Get a record by its ID.
+  recordById(input: RecordByIdInput): Record
+  # Get all the records associated with a given type using the type's ID.
+  recordsByType(input: RecordsByTypeInput): [Record]
+  # Get all fields.
+  fields: [Field]
+  # Get a field by its ID.
+  fieldById(input: FieldByIdInput): Field
+  # Get all users.
+  users: [User]
+  # Get a user by their ID.
+  userById(input: UserByIdInput): User
+}
+
+# A data `record` is an entry within a given `type`. When users show or hide a
+# layer on the map, the `record`s associated with each are the "pins" on the map
+# that appear and disappear.
+#
+# &ZeroWidthSpace;
+#
+# For example: Eco-Soap Bank operates 17 locations ("Hubs") around the world, and
+# they partner with more than 1,000 hotels and dozens of soap manufacturers. It
+# would make sense for us to have a data `type` associated with each:
+#
+# &ZeroWidthSpace;
+#
+# - Hubs
+# - Hotel Partners
+# - Manufacturing Partners
+#
+# &ZeroWidthSpace;
+#
+# Each individual Hub, hotel, and manufacturer would then be a `record` associated
+# with each respective `type`. A `record` of `type` "Hub" might look like this:
+#
+# &ZeroWidthSpace;
+#
+# ```javascript
+# {
+#   id: "00001",
+#   name: "Eco-Soap Bank Rwanda",
+#   type: "Hub",  // In a query mutation, you'd use an ID or an input here.
+#   coordinates: {
+#     latitude: "+401213.1",
+#     longitude: "-0750015.1"
+#   }
+,
+#   fields: [{
+#     id: "01001",
+#     name: "Implementation Partner",
+#     value: "Hope Shines, Inc."
+#   }
+, {
+#     id: "01001",
+#     name: "Women Employed",
+#     value: "6"
+#   }
+]
+# }
+
+# ```
+type Record {
+  id: ID!
+  name: String!
+  type: Type!
+  coordinates: Coordinates!
+  fields: [Field]!
+}
+
+# Input for `recordById`.
+input RecordByIdInput {
+  recordId: ID!
+}
+
+# Input for `type Record`.
+input RecordInput {
+  # The name for this record.
+  name: String!
+  # The ID of the type of this record.
+  typeID: ID!
+  # The location associated with this record, as coordinates.
+  coordinates: CoordinatesInput!
+  # The fields for this record.
+  fields: [FieldInput]!
+}
+
+# Input for `recordsByType`.
+input RecordsByTypeInput {
+  typeId: ID!
+}
+
+# Input for `mutation register`.
+input RegisterInput {
+  email: String!
+  password: String!
+}
+
+# General response payload indicating success or failure of an operation.
+type SuccessPayload {
+  success: Boolean!
+  error: String
+}
+
+# A data `type` is a top-level category. It's the way users can filter the layers they view on the map.
+#
+# &ZeroWidthSpace;
+#
+# For example: Eco-Soap Bank operates 17 locations ("Hubs") around the world, and
+# they partner with more than 1,000 hotels and dozens of soap manufacturers. It
+# would make sense for us to have a data `type` associated with each:
+#
+# &ZeroWidthSpace;
+#
+# - Hubs
+# - Hotel Partners
+# - Manufacturing Partners
+#
+# &ZeroWidthSpace;
+#
+# Each individual Hub, hotel, and manufacturer would then be a `record` associated with each respective `type`.
+type Type {
+  id: ID!
+  name: String!
+  fields: [Field!]!
+  records: [Record]!
+}
+
+# Input for `typeById`.
+input TypeByIdInput {
+  typeId: ID!
+}
+
+# Input for `mutation updateRecord`.
+input UpdateRecordInput {
+  # The ID of the record to update.
+  id: ID!
+  # The name for this record.
+  name: String
+  # The ID of the type of this record.
+  typeId: ID!
+  # The location associated with this record, as coordinates.
+  coordinates: CoordinatesInput!
+  # The fields for this record.
+  fields: [FieldInput!]
+}
+
+# Response payload for `mutation updateRecord`.
+type UpdateRecordPayload {
+  # The updated record object.
+  record: Record
+}
+
+# Input for `mutation updateType`.
+input UpdateTypeInput {
+  # The ID of the type to update.
+  id: ID!
+  # The name for this type.
+  name: String
+  # The fields for this type.
+  fields: [FieldInput!]
+  # The records for this type.
+  records: [RecordInput!]
+}
+
+# Response payload for `mutation updateType`.
+type UpdateTypePayload {
+  # The updated type object.
+  type: Type
+}
+
+# The `Upload` scalar type
+ represents a file upload.
+scalar Upload
+
+# A `user` is an administrator who logs in to make changes. They log in with an email address and password.
+type User {
+  id: ID!
+  email: String!
+  password: String!
+}
+
+# Input for `userById`.
+input UserByIdInput {
+  userId: ID!
+}
+
