@@ -6,8 +6,17 @@ import { config } from '../../../utils/oktaConfig';
 
 const LoginContainer = () => {
   useEffect(() => {
-    const { pkce, issuer, clientId, redirectUri, scopes } = config;
+    const {
+      pkce,
+      issuer,
+      clientId,
+      redirectUri,
+      scopes,
+      logo,
+      brandName,
+    } = config;
     // destructure your config so that you can pass it into the required fields in your widget.
+
     const widget = new OktaSignIn({
       baseUrl: issuer ? issuer.split('/oauth2')[0] : '',
       clientId,
@@ -17,11 +26,14 @@ const LoginContainer = () => {
       },
       features: { registration: false },
       // turning this feature on allows your widget to use Okta for user registration
-      logo: 'path-to-your-logo',
-      // add your custom logo to your signing/register widget here.
+      logo,
+      brandName,
+      colors: {
+        brand: '#3BB54A',
+      },
       i18n: {
         en: {
-          'primaryauth.title': 'Welcome to Labs Basic SPA Please sign in',
+          'primaryauth.title': 'Welcome to Eco-Soap Bank Admin',
           // change title for your app
         },
       },
