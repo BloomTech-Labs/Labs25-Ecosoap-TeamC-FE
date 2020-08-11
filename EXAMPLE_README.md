@@ -1,21 +1,13 @@
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline, feel free to add your own flare to it.
-
-🚫 The numbers 1️⃣ through 5️⃣ next to each item represent the week that part of the docs needs to be comepleted by. Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric. Contributing to docs does NOT count as a PR to meet your weekly requirements.
-
-# 1️⃣ Title of project goes here
+# 1️⃣ Eco Soap Bank - Impact Visualization
 
 1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
 
-## 4️⃣ Contributors
+## Contributors
 
-🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
-
-|                                                      [Student 1](https://github.com/)                                                       |                                                       [Student 2](https://github.com/)                                                        |                                                      [Student 3](https://github.com/)                                                       |                                                       [Student 4](https://github.com/)                                                        |                                                      [Student 5](https://github.com/)                                                       |
+|                                                      [Anthony Koharian](https://github.com/antonyk)                                                       |                                                       [Joshua Horrocks](https://github.com/joshuabhorrocks)                                                        |                                                      [Mario Fernandez](https://github.com/diddleslip)                                                       |                                                       [Nathan Saygers](https://github.com/nathan-saygers)                                                        |                                                      [Tevin Morris](https://github.com/tevindesigned)                                                       |
 | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: |
-| [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) |
-|                                [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                                |                            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/honda0306)                             |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Mister-Corn)                           |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/NandoTheessen)                           |                           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wvandolah)                            |
+| [<img src="https://ca.slack-edge.com/ESZCHB482-W012X6WK6M7-95f19e653bab-512" width = "200" />](https://github.com/antonyk) | [<img src="https://ca.slack-edge.com/ESZCHB482-W012H6STLNR-9949c8eb555d-512" width = "200" />](https://github.com/joshuabhorrocks) | [<img src="https://ca.slack-edge.com/ESZCHB482-W012QNWR9QU-220f650227d4-512" width = "200" />](https://github.com/diddleslip) | [<img src="https://ca.slack-edge.com/ESZCHB482-W012JQ1JHU3-0243caec0d84-512" width = "200" />](https://github.com/nathan-saygers) | [<img src="https://ca.slack-edge.com/ESZCHB482-W012JPYU6E7-5f5ef73efffb-512" width = "200" />](https://github.com/tevindesigned) |
+|                                [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/antonyk)                                |                            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/joshuabhorrocks)                             |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/diddleslip)                           |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/nathan-saygers)                           |                           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/tevindesigned)                            |
 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |
 
 <br>
@@ -33,11 +25,17 @@
 
 ## Project Overview
 
-1️⃣ [Trello Board](🚫add link to trello board here)
+[Product Roadmap](https://www.notion.so/EcoSoap-Web-Roadmap-Student-Facing-189ef5d8abe4471a987c7b9dbc1b5aa4)
 
-1️⃣ [Product Canvas](🚫add link to product canvas here)
+[Trello Board](https://trello.com/b/gIpwHNd1/labs25ecosoapnate)
 
-1️⃣ [UX Design files](🚫add link to design files here) - 🚫 delete if not applicable
+[User Flow - Whimsical](https://whimsical.com/ADrsRXVJo9hPhVAkwSGS49)
+
+[Architecture Diagram - Whimsical](https://whimsical.com/LZUNB49o5byngnBBSzwSPU)
+
+[Product Canvas]
+
+[UX Design Figma file](https://www.figma.com/file/7F2sr5OiAhdizUrLdKaoOb/ECO-Soap-Bank-Tevin-Morris?node-id=15%3A8)
 
 🚫 Replace lorem ipsum with a description of your project
 
@@ -53,20 +51,33 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 - feature four
 - feature five
 
-## 1️⃣ Tech Stack
+## Tech Stack
 
 ### Front end built using:
 
-#### _Front end framework goes here_
+#### React
+- A mature and stable front-end library
+- Maintained by Facebook
+- Great for developing SPAs using JavaScript
 
-🚫 Why did you choose this framework?
+#### Okta
+- A Trusted 3rd party Auth service
 
-- point one
-- point two
+#### Ant.design
+- Highly popular UI framework
+- Rich library of UI components
+- Responsive out of the box
+
+#### Apollo Client
+- Best API for GraphQL queries
+
+#### MapBox
+- It is great for JavaScript-based SPAs
+- Facebook uses it
 - point three
 - point four
 
-🚫List the rest of the front end features and libraries in the same format as the framework above.
+
 
 #### Front end deployed to `🚫insert service here`
 
@@ -82,13 +93,13 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 
 # APIs
 
-## 2️⃣ Authentication API here
+## 2️⃣ Authentication - Okta API
 
 🚫Replace text below with a description of the API
 
 Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
 
-## 2️⃣ Payment API here
+## 2️⃣ Mapping API - Mapbox
 
 🚫Replace text below with a description of the API
 
@@ -100,17 +111,6 @@ This is the way you take out your flustrations. Get away from those little Chris
 
 You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
 
-## 3️⃣ Misc API here
-
-🚫Replace text below with a description of the API
-
-When you do it your way you can go anywhere you choose. Let your heart take you to wherever you want to be. If I paint something, I don't want to have to explain what it is. A tree needs to be your friend if you're going to paint him. That's a son of a gun of a cloud. Even the worst thing we can do here is good.
-
-## 3️⃣ Misc API here
-
-🚫Replace text below with a description of the API
-
-Volunteering your time; it pays you and your whole community fantastic dividends. Maybe there's a happy little waterfall happening over here. You can spend all day playing with mountains. We don't have to be committed. We are just playing here. You have freedom here. The only guide is your heart. It's cold, but it's beautiful.
 
 # 3️⃣ Environment Variables
 
@@ -118,16 +118,18 @@ In order for the app to function correctly, the user must set up their own envir
 
 🚫These are just examples, replace them with the specifics for your app
 
+    *  REACT_APP_CLIENT_ID - Okta Client ID
+    *  REACT_APP_OKTA_ISSUER_URI - Okta Issuer URI
+    *  REACT_APP_API_URI - Okta uses this
+
     *  REACT_APP_apiKey - this is your Google API key, which can be generated in the Google Cloud Console
     *  REACT_APP_authDomain - when you set up your Firebase project, this information will be in the dashboard
     *  REACT_APP_databaseURL - in the Firebase dashboard
     *  REACT_APP_projectID - in the Firebase dashboard
     *  REACT_APP_storageBucket - in the Firebase dashboard
     *  REACT_APP_messagingSenderId - in the Firebase dashboard
-    *  REACT_APP_stripe_API - this is your public Stripe API key, generated in the Stripe dashboard
     *  REACT_APP_backendURL - optional for your local development server
     *  REACT_APP_clientid - this is the Stripe_connect clientID, generated in Stripe_connect settings
-    *  REACT_APP_stripe_plan - this is the ID for a second Stripe subscription plan, generated under Stripe products
 
 # 5️⃣ Content Licenses
 
@@ -179,6 +181,8 @@ We would love to hear from you about new features which would improve this app a
 If you have developed a patch, bug fix, or new feature that would improve this app, please submit a pull request. It is best to communicate your ideas with the developers first before investing a great deal of time into a pull request to ensure that it will mesh smoothly with the project.
 
 Remember that this project is licensed under the MIT license, and by submitting a pull request, you agree that your work will be, too.
+
+#### [Pull Request Template](https://docs.google.com/document/d/1skNSiLmslzylKLhgmwtjK3bV2ebfjIsZmo1WWh38JnI/edit)
 
 #### Pull Request Guidelines
 
