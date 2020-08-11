@@ -4,11 +4,11 @@
 
 ## Contributors
 
-|                                                      [Anthony Koharian](https://github.com/antonyk)                                                       |                                                       [Joshua Horrocks](https://github.com/joshuabhorrocks)                                                        |                                                      [Mario Fernandez](https://github.com/diddleslip)                                                       |                                                       [Nathan Saygers](https://github.com/nathan-saygers)                                                        |                                                      [Tevin Morris](https://github.com/tevindesigned)                                                       |
-| :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: |
+|                                       [Anthony Koharian](https://github.com/antonyk)                                       |                                       [Joshua Horrocks](https://github.com/joshuabhorrocks)                                        |                                       [Mario Fernandez](https://github.com/diddleslip)                                        |                                        [Nathan Saygers](https://github.com/nathan-saygers)                                        |                                         [Tevin Morris](https://github.com/tevindesigned)                                         |
+| :------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: |
 | [<img src="https://ca.slack-edge.com/ESZCHB482-W012X6WK6M7-95f19e653bab-512" width = "200" />](https://github.com/antonyk) | [<img src="https://ca.slack-edge.com/ESZCHB482-W012H6STLNR-9949c8eb555d-512" width = "200" />](https://github.com/joshuabhorrocks) | [<img src="https://ca.slack-edge.com/ESZCHB482-W012QNWR9QU-220f650227d4-512" width = "200" />](https://github.com/diddleslip) | [<img src="https://ca.slack-edge.com/ESZCHB482-W012JQ1JHU3-0243caec0d84-512" width = "200" />](https://github.com/nathan-saygers) | [<img src="https://ca.slack-edge.com/ESZCHB482-W012JPYU6E7-5f5ef73efffb-512" width = "200" />](https://github.com/tevindesigned) |
-|                                [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/antonyk)                                |                            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/joshuabhorrocks)                             |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/diddleslip)                           |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/nathan-saygers)                           |                           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/tevindesigned)                            |
-|                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |
+|                    [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/antonyk)                    |                    [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/joshuabhorrocks)                    |                    [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/diddleslip)                    |                    [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/nathan-saygers)                    |                    [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/tevindesigned)                    |
+|       [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)        |           [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)            |         [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)         |           [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)           |          [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)           |
 
 <br>
 <br>
@@ -56,28 +56,31 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 ### Front end built using:
 
 #### React
+
 - A mature and stable front-end library
 - Maintained by Facebook
 - Great for developing SPAs using JavaScript
 
 #### Okta
+
 - A Trusted 3rd party Auth service
 
 #### Ant.design
+
 - Highly popular UI framework
 - Rich library of UI components
 - Responsive out of the box
 
 #### Apollo Client
+
 - Best API for GraphQL queries
 
 #### MapBox
+
 - It is great for JavaScript-based SPAs
 - Facebook uses it
 - point three
 - point four
-
-
 
 #### Front end deployed to `🚫insert service here`
 
@@ -111,7 +114,6 @@ This is the way you take out your flustrations. Get away from those little Chris
 
 You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
 
-
 # 3️⃣ Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
@@ -120,7 +122,7 @@ In order for the app to function correctly, the user must set up their own envir
 
     *  REACT_APP_CLIENT_ID - Okta Client ID
     *  REACT_APP_OKTA_ISSUER_URI - Okta Issuer URI
-    *  REACT_APP_API_URI - Okta uses this
+    *  REACT_APP_API_URI - Our back-end endpoint's URI
 
     *  REACT_APP_apiKey - this is your Google API key, which can be generated in the Google Cloud Console
     *  REACT_APP_authDomain - when you set up your Firebase project, this information will be in the dashboard
