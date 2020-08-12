@@ -6,7 +6,6 @@
     display: flex;
     justify-content: center;
     position: relative;
-    /* border: 1px solid red; */
 }
 
 #eco-soap-logo {
@@ -16,30 +15,63 @@
     margin-bottom: 1%;
     position: absolute;
     z-index: 1;
-    /* border: 1px solid red; */
 }
 
 #sign-in-widget {
     margin-top: 8%;
     position: absolute;
-    /* border: 1px solid black; */
 }
 
 /* Width Break Points */
+@media only screen and (max-width: 1250px) {
+    #sign-in-widget {
+        margin-top: 8.5%
+    }
+}
+@media only screen and (max-width: 1000px) {
+    #sign-in-widget {
+        margin-top: 10%
+    }
+}
 @media only screen and (max-width: 800px) {
     #sign-in-widget {
         margin-top: 10%
     }
 }
-@media only screen and (max-width: 481px) {
+@media only screen and (max-width: 630px) {
     #sign-in-widget {
-        margin-top: 25%
+        margin-top: 12%
+    }
+}
+@media only screen and (max-width: 480px) {
+    #sign-in-widget {
+        margin-top: 35%
+    }
+}
+@media only screen and (max-width: 430px) {
+    #sign-in-widget {
+        margin-top: 38%
+    }
+}
+@media only screen and (max-width: 390px) {
+    #sign-in-widget {
+        margin-top: 40%
+    }
+}
+@media only screen and (max-width: 350px) {
+    #sign-in-widget {
+        margin-top: 45%
+    }
+}
+@media only screen and (max-width: 320px) {
+    #sign-in-widget {
+        margin-top: 50%
     }
 }
 
 /* Height Break Points */
-@media only screen and (max-height: 750px) {
+@media only screen and (max-height: 700px) {
     #sign-in-widget {
-        margin-top: 16.35%
+        margin-top: 40%
     }
 }
