@@ -7,6 +7,8 @@ import {
   Switch,
 } from 'react-router-dom';
 import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
 
 import 'antd/dist/antd.less';
 
@@ -18,6 +20,12 @@ import { HomePage } from './components/pages/Home';
 import { ExampleDataViz } from './components/pages/ExampleDataViz';
 import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
+import { CreateAdminCont } from './components/pages/CreateAdmin';
+
+const client = new ApolloClient({
+  uri: 'http://35.208.9.187:9093/web-api-3',
+  cache: new InMemoryCache(),
+});
 
 ReactDOM.render(
   <Router>
@@ -41,20 +49,23 @@ function App() {
 
   return (
     <Security {...config} onAuthRequired={authHandler}>
-      <Switch>
-        <Route path="/login" component={LoginPage} />
-        <Route path="/implicit/callback" component={LoginCallback} />
-        {/* any of the routes you need secured should be registered as SecureRoutes */}
-        <SecureRoute
-          path="/"
-          exact
-          component={() => <HomePage LoadingComponent={LoadingComponent} />}
-        />
-        <SecureRoute path="/example-list" component={ExampleListPage} />
-        <SecureRoute path="/profile-list" component={ProfileListPage} />
-        <SecureRoute path="/datavis" component={ExampleDataViz} />
-        <Route component={NotFoundPage} />
-      </Switch>
+      <ApolloProvider client={client}>
+        <Switch>
+          <Route path="/login" component={LoginPage} />
+          <Route path="/asd" component={CreateAdminCont} />
+          <Route path="/implicit/callback" component={LoginCallback} />
+          {/* any of the routes you need secured should be registered as SecureRoutes */}
+          <SecureRoute
+            path="/"
+            exact
+            component={() => <HomePage LoadingComponent={LoadingComponent} />}
+          />
+          <SecureRoute path="/example-list" component={ExampleListPage} />
+          <SecureRoute path="/profile-list" component={ProfileListPage} />
+          <SecureRoute path="/datavis" component={ExampleDataViz} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </ApolloProvider>
     </Security>
   );
 }
