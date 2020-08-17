@@ -1,34 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import * as yup from 'yup';
-import { useForm } from 'react-hook-form';
 import './CreateAdminContainer.css';
 import { useQuery, useMutation, gql } from '@apollo/client';
 // import { connect } from 'react-redux';
 
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .required('E-mail is required')
-    .email('YOU NEED ZE @!'),
-  password: yup
-    .string()
-    .min(6, 'Password must be at least 6 characters long')
-    .required('Password is required'),
-});
-
-const query1 = gql`
-  {
-    users {
-      id
-      email
-      password
-    }
-  }
-`;
-
 const mutation1 = gql`
-  mutation registerNewUser {
+  mutation registerNewUser($email: String!, $password: String!) {
     register(input: { email: $email, password: $password }) {
       user {
         id
@@ -38,19 +15,6 @@ const mutation1 = gql`
     }
   }
 `;
-
-function GetUsers() {
-  const { loading, error, data } = useQuery(query1);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-  console.log(data);
-  return data.users.map(({ id, email, password }) => (
-    <div key={id}>
-      <p>{`${email}: ${password}`}</p>
-    </div>
-  ));
-}
 
 const SignInForm = props => {
   const [registerNewUser, { mutData }] = useMutation(mutation1);
@@ -122,8 +86,6 @@ const SignInForm = props => {
           {/* <p>Go back <Link to="/dashboard">Login</Link></p> */}
           <input className="submitButton" type="submit" value="Create Admin" />
         </form>
-
-        {/* <GetUsers /> */}
       </div>
     </div>
   );
