@@ -28,18 +28,6 @@ const query1 = gql`
   }
 `;
 
-const mutation1 = gql`
-  mutation registerNewUser {
-    register(input: { email: "testOne@hotmail.com", password: "testOne" }) {
-      user {
-        id
-        email
-        password
-      }
-    }
-  }
-`;
-
 function GetUsers() {
   const { loading, error, data } = useQuery(query1);
 
@@ -53,9 +41,31 @@ function GetUsers() {
   ));
 }
 
-const SignInForm = props => {
-  const { push } = useHistory();
+function AddAdmin() {
+  let input;
+  const [addTodo, { data }] = useMutation();
 
+  return (
+    <div>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          addTodo({ variables: { type: input.value } });
+          input.value = '';
+        }}
+      >
+        <input
+          ref={node => {
+            input = node;
+          }}
+        />
+        <button type="submit">Add Todo</button>
+      </form>
+    </div>
+  );
+}
+
+const SignInForm = props => {
   const [data, setData] = useState([
     {
       eMail: '',
@@ -63,29 +73,20 @@ const SignInForm = props => {
     },
   ]);
 
-  function AddAdmin() {
-    let input;
-    const [addTodo, { data }] = useMutation(mutation1);
-
-    return (
-      <div>
-        <form
-          onSubmit={e => {
-            e.preventDefault();
-            addTodo({ variables: { type: input.value } });
-            input.value = '';
-          }}
-        >
-          <input
-            ref={node => {
-              input = node;
-            }}
-          />
-          <button type="submit">Add Todo</button>
-        </form>
-      </div>
-    );
+  const mutation1 = gql`
+  mutation registerNewUser {
+    register(input: { email: ${data.eMail}, password: ${data.passWord} }) {
+      user {
+        id
+        email
+        password
+      }
+    }
   }
+`;
+
+  const { push } = useHistory();
+  const [addTodo, { mutData }] = useMutation(mutation1);
 
   const handleChange = event => {
     setData({
