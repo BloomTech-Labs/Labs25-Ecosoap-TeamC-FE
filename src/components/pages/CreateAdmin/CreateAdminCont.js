@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
-import { Button } from 'antd';
 import './CreateAdminContainer.css';
 import { useQuery, useMutation, gql } from '@apollo/client';
 // import { connect } from 'react-redux';
@@ -28,6 +27,18 @@ const query1 = gql`
   }
 `;
 
+const mutation1 = gql`
+  mutation registerNewUser {
+    register(input: { email: $email, password: $password }) {
+      user {
+        id
+        email
+        password
+      }
+    }
+  }
+`;
+
 function GetUsers() {
   const { loading, error, data } = useQuery(query1);
 
@@ -41,52 +52,16 @@ function GetUsers() {
   ));
 }
 
-function AddAdmin() {
-  let input;
-  const [addTodo, { data }] = useMutation();
-
-  return (
-    <div>
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          addTodo({ variables: { type: input.value } });
-          input.value = '';
-        }}
-      >
-        <input
-          ref={node => {
-            input = node;
-          }}
-        />
-        <button type="submit">Add Todo</button>
-      </form>
-    </div>
-  );
-}
-
 const SignInForm = props => {
+  const [registerNewUser, { mutData }] = useMutation(mutation1);
+  const { push } = useHistory();
+
   const [data, setData] = useState([
     {
       eMail: '',
       passWord: '',
     },
   ]);
-
-  const mutation1 = gql`
-  mutation registerNewUser {
-    register(input: { email: ${data.eMail}, password: ${data.passWord} }) {
-      user {
-        id
-        email
-        password
-      }
-    }
-  }
-`;
-  // Test test one
-  const { push } = useHistory();
-  const [addTodo, { mutData }] = useMutation(mutation1);
 
   const handleChange = event => {
     setData({
@@ -100,6 +75,9 @@ const SignInForm = props => {
     // props.addNewAdmin(data);
     // push("/dashboard");
     e.preventDefault();
+    registerNewUser({
+      variables: { email: data.eMail, password: data.passWord },
+    });
     console.log(data.eMail, data.passWord);
   };
 

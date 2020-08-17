@@ -19,7 +19,7 @@
     width: 145px;
     height: 125px;
     margin-top: 8%;
-    margin-left: 37%;
+    margin-left: 36.5%;
 }
 
 .signUpForm {
@@ -32,6 +32,7 @@
 
 .title {
     margin-left: 2%;
+    text-align: center;
     /* border: 1px solid red; */
 }
 
@@ -75,6 +76,18 @@
     margin-left: -10%;
 }
 
+@media only screen and (max-width: 1670px) {
+    .eco-soap-logo {
+        margin-left: 35%;
+    }
+}
+
+@media only screen and (max-width: 1370px) {
+    .eco-soap-logo {
+        margin-left: 31%;
+    }
+}
+
 @media only screen and (max-width: 1024px) {
     .formContainer {
         width: 75%;
@@ -82,6 +95,18 @@
     }
     .eco-soap-logo {
         margin-left: 41%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .eco-soap-logo {
+        margin-left: 38%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .eco-soap-logo {
+        margin-left: 29%;
     }
 }
 
@@ -100,6 +125,12 @@
     }
 }
 
+@media only screen and (max-width: 360px) {
+    .eco-soap-logo {
+        margin-left: 25%;
+    }
+}
+
 @media only screen and (max-width: 320px) {
     .eco-soap-logo {
         margin-left: 22%;
@@ -108,6 +139,10 @@
 
 @media only screen and (max-width: 280px) {
     .eco-soap-logo {
-        margin-left: 20%;
+        margin-left: 15%;
+    }
+    .title {
+        margin-left: 2%;
+        /* border: 1px solid red; */
     }
 }
