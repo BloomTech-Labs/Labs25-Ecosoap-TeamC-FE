@@ -65,7 +65,7 @@
 .submitButton {
     background: #3BB54A;
     color: #fff;
-    font-family: proxima nova,montserrat,Arial,Helvetica,sans-serif;
+    font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
     width: 120%;
     height: 4vh;
     border-radius: 5px;
@@ -85,14 +85,23 @@
     }
 }
 
+@media only screen and (max-width: 414px) {
+    .eco-soap-logo {
+        margin-left: 28%;
+    }
+    .submitButton {
+        margin-left: -10%;
+    }
+}
+
 @media only screen and (max-width: 375px) {
     .eco-soap-logo {
         margin-left: 26%;
     }
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 320px) {
     .eco-soap-logo {
-        margin-left: 20%;
+        margin-left: 22%;
     }
 }
