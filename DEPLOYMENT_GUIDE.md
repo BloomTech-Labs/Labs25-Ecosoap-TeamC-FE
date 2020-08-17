@@ -1,5 +1,7 @@
 # Deploying Your App
 
+Committing for AWS Deployment
+
 1. Make sure you have cloned this repo by clicking "use this template" and giving your repo a name.
 
 ![Using a GitHub Template](https://tk-assets.lambdaschool.com/d7226911-312b-48cb-882d-c7f7c8a0a69a_Screenshot2020-07-16at23.10.50.png)
