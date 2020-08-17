@@ -45,7 +45,7 @@ function GetUsers() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-
+  console.log(data);
   return data.users.map(({ id, email, password }) => (
     <div key={id}>
       <p>{`${email}: ${password}`}</p>
@@ -63,6 +63,30 @@ const SignInForm = props => {
     },
   ]);
 
+  function AddAdmin() {
+    let input;
+    const [addTodo, { data }] = useMutation(mutation1);
+
+    return (
+      <div>
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            addTodo({ variables: { type: input.value } });
+            input.value = '';
+          }}
+        >
+          <input
+            ref={node => {
+              input = node;
+            }}
+          />
+          <button type="submit">Add Todo</button>
+        </form>
+      </div>
+    );
+  }
+
   const handleChange = event => {
     setData({
       ...data,
@@ -71,12 +95,12 @@ const SignInForm = props => {
     console.log(data);
   };
 
-  // const onSubmit = e => {
-  //     // props.addNewAdmin(data);
-  //     // push("/dashboard");
-  //     e.preventDefault();
-  //     console.log(data.eMail, data.passWord);
-  // };
+  const onSubmit = e => {
+    // props.addNewAdmin(data);
+    // push("/dashboard");
+    e.preventDefault();
+    console.log(data.eMail, data.passWord);
+  };
 
   return (
     <div className="formContainer">
@@ -94,8 +118,7 @@ const SignInForm = props => {
         <form
           className="form"
           onSubmit={e => {
-            e.preventDefault();
-            console.log(data.eMail, data.passWord);
+            onSubmit(e);
           }}
         >
           <label className="emailBox" htmlFor="email">
@@ -118,12 +141,10 @@ const SignInForm = props => {
           </label>
           {/* Code below will go into function once we get a dashboard setup. */}
           {/* <p>Go back <Link to="/dashboard">Login</Link></p> */}
-          <Button className="submitbutton" type="primary">
-            Create Admin
-          </Button>
+          <input className="submitButton" type="submit" value="Create Admin" />
         </form>
 
-        <GetUsers />
+        {/* <GetUsers /> */}
       </div>
     </div>
   );
