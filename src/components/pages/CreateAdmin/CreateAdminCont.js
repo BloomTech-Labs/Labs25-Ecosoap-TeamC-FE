@@ -1,81 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import * as yup from 'yup';
-import { useForm } from 'react-hook-form';
-import { Button } from 'antd';
 import './CreateAdminContainer.css';
 import { useQuery, useMutation, gql } from '@apollo/client';
 // import { connect } from 'react-redux';
 
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .required('E-mail is required')
-    .email('YOU NEED ZE @!'),
-  password: yup
-    .string()
-    .min(6, 'Password must be at least 6 characters long')
-    .required('Password is required'),
-});
-
-const query1 = gql`
-  {
-    users {
-      id
-      email
-      password
-    }
-  }
-`;
-
-function GetUsers() {
-  const { loading, error, data } = useQuery(query1);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-  console.log(data);
-  return data.users.map(({ id, email, password }) => (
-    <div key={id}>
-      <p>{`${email}: ${password}`}</p>
-    </div>
-  ));
-}
-
-function AddAdmin() {
-  let input;
-  const [addTodo, { data }] = useMutation();
-
-  return (
-    <div>
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          addTodo({ variables: { type: input.value } });
-          input.value = '';
-        }}
-      >
-        <input
-          ref={node => {
-            input = node;
-          }}
-        />
-        <button type="submit">Add Todo</button>
-      </form>
-    </div>
-  );
-}
-
-const SignInForm = props => {
-  const [data, setData] = useState([
-    {
-      eMail: '',
-      passWord: '',
-    },
-  ]);
-
-  const mutation1 = gql`
-  mutation registerNewUser {
-    register(input: { email: ${data.eMail}, password: ${data.passWord} }) {
+const mutation1 = gql`
+  mutation registerNewUser($email: String!, $password: String!) {
+    register(input: { email: $email, password: $password }) {
       user {
         id
         email
@@ -84,9 +15,17 @@ const SignInForm = props => {
     }
   }
 `;
-  // Test test one
+
+const SignInForm = props => {
+  const [registerNewUser, { mutData }] = useMutation(mutation1);
   const { push } = useHistory();
-  const [addTodo, { mutData }] = useMutation(mutation1);
+
+  const [data, setData] = useState([
+    {
+      eMail: '',
+      passWord: '',
+    },
+  ]);
 
   const handleChange = event => {
     setData({
@@ -100,6 +39,9 @@ const SignInForm = props => {
     // props.addNewAdmin(data);
     // push("/dashboard");
     e.preventDefault();
+    registerNewUser({
+      variables: { email: data.eMail, password: data.passWord },
+    });
     console.log(data.eMail, data.passWord);
   };
 
@@ -144,8 +86,6 @@ const SignInForm = props => {
           {/* <p>Go back <Link to="/dashboard">Login</Link></p> */}
           <input className="submitButton" type="submit" value="Create Admin" />
         </form>
-
-        {/* <GetUsers /> */}
       </div>
     </div>
   );
