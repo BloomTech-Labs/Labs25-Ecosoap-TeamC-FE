@@ -22,7 +22,7 @@ import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 import { CreateAdminCont } from './components/pages/CreateAdmin';
 import { AdminDashboard } from './components/pages/AdminDashboard';
-import { UsersComp } from './components/pages/UsersComp';
+import { UsersList } from './components/pages/UsersList';
 
 const client = new ApolloClient({
   uri: 'http://35.208.9.187:9093/web-api-3',
@@ -55,7 +55,7 @@ function App() {
         <Switch>
           <Route path="/login" component={LoginPage} />
           <Route path="/dashboard" component={AdminDashboard} />
-          <Route path="/users" component={UsersComp} />
+          <Route path="/users" component={UsersList} />
           <Route path="/newUser" component={CreateAdminCont} />
           <Route path="/implicit/callback" component={LoginCallback} />
           {/* any of the routes you need secured should be registered as SecureRoutes */}

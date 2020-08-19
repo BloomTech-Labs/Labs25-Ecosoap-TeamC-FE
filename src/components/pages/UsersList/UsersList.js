@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './UsersComp.css';
+import './UsersList.css';
 import { useQuery, useMutation, gql } from '@apollo/client';
 
 const query1 = gql`
@@ -24,7 +24,7 @@ const deleteAdmin = gql`
   }
 `;
 
-const UsersComp = () => {
+const UsersList = () => {
   const [deleteUser, { mutData }] = useMutation(deleteAdmin);
   const [userData, setUserData] = useState();
 
@@ -62,7 +62,6 @@ const UsersComp = () => {
       }
     });
     console.log('SECOND ATTEMPT', userData);
-
     e.preventDefault();
     deleteUser({
       variables: { email: email },
@@ -89,4 +88,4 @@ const UsersComp = () => {
   );
 };
 
-export default UsersComp;
+export default UsersList;

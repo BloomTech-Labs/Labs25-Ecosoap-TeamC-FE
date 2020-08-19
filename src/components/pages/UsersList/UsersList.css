@@ -1,13 +1,14 @@
-h1 {
+.title {
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 .eco-soap-logo {
     width: 145px;
     height: 125px;
-    margin-top: 2%;
-    margin-left: 46.5%;
+    margin-top: 1%;
+    align-items: center;
 }
 
 .page {

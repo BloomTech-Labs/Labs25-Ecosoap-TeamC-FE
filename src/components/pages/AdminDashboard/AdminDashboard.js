@@ -40,6 +40,13 @@ const AdminDashboard = () => {
           <h1>{userInfo.email}</h1>
 
           {console.log(userInfo)}
+          <button
+            className="logout-button"
+            type="primary"
+            onClick={() => authService.logout()}
+          >
+            Logout
+          </button>
         </div>
       )}
     </div>
