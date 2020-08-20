@@ -7,7 +7,6 @@ function LoadingComponent(props) {
   return (
     <div>
       {message}
-      {console.log('THIS IS MESSAGE: ', message)}
     </div>
   );
 }
