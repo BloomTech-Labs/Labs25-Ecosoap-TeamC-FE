@@ -4,7 +4,11 @@ import React from 'react';
 function LoadingComponent(props) {
   const { message } = props;
 
-  return <div>{message}</div>;
+  return (
+    <div>
+      {message}
+    </div>
+  );
 }
 
 export default LoadingComponent;
