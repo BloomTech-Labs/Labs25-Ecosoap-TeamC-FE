@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './UsersList.css';
 import logo from '../../../media/eco-soap-logo.png';
 import { useQuery, useMutation, gql } from '@apollo/client';
 
-const query1 = gql`
-  {
+const GET_USER_QUERY = gql`
+  query getUsers {
     users {
       id
       email
@@ -12,8 +12,7 @@ const query1 = gql`
     }
   }
 `;
-
-const deleteAdmin = gql`
+const DELETE_ADMIN_MUTATION = gql`
   mutation deleteAdmin($email: String!) {
     deleteUser(input: { email: $email }) {
       user {
@@ -24,45 +23,12 @@ const deleteAdmin = gql`
     }
   }
 `;
-
 const UsersList = () => {
-  const [deleteUser, { mutData }] = useMutation(deleteAdmin);
-  const [userData, setUserData] = useState();
-
-  useEffect(() => {}, [userData]);
-
-  function GetUsers() {
-    const { loading, error, data } = useQuery(query1);
-
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
-    setUserData(data.users);
-    console.log(userData);
-    // console.log("This is DATA! ", data.users)
-
-    return data.users.map(({ id, email, password }) => (
-      <div className="user-card" key={id}>
-        <p>{`This is email: ${email}`}</p>
-        <p>{`This is password: ${password}`}</p>
-        <button className="button-modify">Modify</button>
-        <button className="button-delete" onClick={e => deleteFunc(e, email)}>
-          Delete
-        </button>
-      </div>
-    ));
-  }
-
+  const [deleteUser] = useMutation(DELETE_ADMIN_MUTATION, {
+    refetchQueries: ['getUsers'],
+  });
+  const { loading, error, data } = useQuery(GET_USER_QUERY);
   const deleteFunc = (e, email) => {
-    console.log('FIRST ATTEMPT', userData);
-    userData.filter(i => {
-      console.log('THESE ARE EMAIL', i.email, email);
-      if (i.email !== email) {
-        console.log('TRUE!!!!!!');
-        setUserData('');
-        setUserData({ ...userData, i });
-      }
-    });
-    console.log('SECOND ATTEMPT', userData);
     e.preventDefault();
     deleteUser({
       variables: { email: email },
@@ -77,11 +43,25 @@ const UsersList = () => {
       <h1 className="title">Admin Users</h1>
       <div className="page">
         <div className="users-form">
-          <GetUsers />
+          {loading && <p>Loading...</p>}
+          {error && <p>Error...</p>}
+          {data &&
+            data.users.map(({ id, email, password }) => (
+              <div className="user-card" key={id}>
+                <p>{`This is email: ${email}`}</p>
+                <p>{`This is password: ${password}`}</p>
+                <button className="button-modify">Modify</button>
+                <button
+                  className="button-delete"
+                  onClick={e => deleteFunc(e, email)}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
         </div>
       </div>
     </div>
   );
 };
-
 export default UsersList;
