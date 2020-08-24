@@ -56,13 +56,15 @@ function App() {
           <Route path="/login" component={LoginPage} />
           <Route path="/dashboard" component={AdminDashboard} />
           <Route path="/users" component={UsersList} />
-          <Route path="/newUser" component={CreateAdminCont} />
+          <Route path="/create-user" component={CreateAdminCont} />
           <Route path="/implicit/callback" component={LoginCallback} />
           {/* any of the routes you need secured should be registered as SecureRoutes */}
           <SecureRoute
             path="/"
             exact
-            component={() => <HomePage LoadingComponent={LoadingComponent} />}
+            component={() => (
+              <AdminDashboard LoadingComponent={LoadingComponent} />
+            )}
           />
           <SecureRoute path="/example-list" component={ExampleListPage} />
           <SecureRoute path="/profile-list" component={ProfileListPage} />

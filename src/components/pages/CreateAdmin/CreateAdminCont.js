@@ -15,7 +15,7 @@ const mutation1 = gql`
     }
   }
 `;
-
+// TODO: PASSWORD RESTRICTIONS: minimum of 8 chars, one uppercase, one lowercase, one digit
 const SignInForm = () => {
   const [registerNewUser, { mutData }] = useMutation(mutation1);
   const { push } = useHistory();
@@ -63,7 +63,7 @@ const SignInForm = () => {
             <input
               className="email"
               placeholder="E-mail*"
-              type="text"
+              type="email"
               name="eMail"
               onChange={event => handleChange(event)}
             />
