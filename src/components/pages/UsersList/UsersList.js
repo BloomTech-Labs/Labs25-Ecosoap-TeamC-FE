@@ -27,14 +27,14 @@ const DELETE_ADMIN_MUTATION = gql`
 `;
 
 const UsersList = () => {
-  const [deleteUser] = useMutation(DELETE_ADMIN_MUTATION, {
+  const [deleteAdmin] = useMutation(DELETE_ADMIN_MUTATION, {
     refetchQueries: ['getUsers'],
   });
   const { loading, error, data } = useQuery(GET_USER_QUERY);
   console.log(error);
   const deleteFunc = (e, email) => {
     e.preventDefault();
-    deleteUser({
+    deleteAdmin({
       variables: { email: email },
     });
     console.log(email);
