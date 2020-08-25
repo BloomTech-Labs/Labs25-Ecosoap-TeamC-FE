@@ -4,20 +4,17 @@ import './CreateAdminContainer.css';
 import logo from '../../../media/eco-soap-logo.png';
 import { useMutation, gql } from '@apollo/client';
 
-const mutation1 = gql`
+const CREATE_NEW_USER = gql`
   mutation registerNewUser($email: String!, $password: String!) {
     register(input: { email: $email, password: $password }) {
-      user {
-        id
-        email
-        password
-      }
+      success
+      error
     }
   }
 `;
 // TODO: PASSWORD RESTRICTIONS: minimum of 8 chars, one uppercase, one lowercase, one digit
 const SignInForm = () => {
-  const [registerNewUser, { mutData }] = useMutation(mutation1);
+  const [registerNewUser, { mutData }] = useMutation(CREATE_NEW_USER);
   const { push } = useHistory();
 
   const [data, setData] = useState([
