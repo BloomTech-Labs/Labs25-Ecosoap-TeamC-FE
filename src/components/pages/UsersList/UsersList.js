@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './UsersList.css';
 import logo from '../../../media/eco-soap-logo.png';
 import { Link } from 'react-router-dom';
-import { useQuery, useMutation, gql, makeVar } from '@apollo/client';
+import { useQuery, useMutation, gql } from '@apollo/client';
 
 const GET_USER_QUERY = gql`
   query getUsers {
@@ -27,13 +27,14 @@ const DELETE_ADMIN_MUTATION = gql`
 `;
 
 const UsersList = () => {
-  const [deleteUser] = useMutation(DELETE_ADMIN_MUTATION, {
+  const [deleteAdmin] = useMutation(DELETE_ADMIN_MUTATION, {
     refetchQueries: ['getUsers'],
   });
   const { loading, error, data } = useQuery(GET_USER_QUERY);
+  console.log(error);
   const deleteFunc = (e, email) => {
     e.preventDefault();
-    deleteUser({
+    deleteAdmin({
       variables: { email: email },
     });
     console.log(email);
