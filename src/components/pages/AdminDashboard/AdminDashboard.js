@@ -32,7 +32,7 @@ const AdminDashboard = () => {
     return () => (isSubscribed = false);
   }, [memoAuthService]);
 
-  const SideBar = () => {};
+  // const SideBar = () => {};
 
   console.log(userInfo);
 
