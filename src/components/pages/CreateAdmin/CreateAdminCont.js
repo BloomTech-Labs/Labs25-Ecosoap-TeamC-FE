@@ -1,9 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import './CreateAdminContainer.css';
 import logo from '../../../media/eco-soap-logo.png';
 import { useMutation, gql } from '@apollo/client';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers';
+import { useForm } from 'react-hook-form';
 
+// Graph QL Query for getting all users ()
+const GET_USER_QUERY = gql`
+  query getUsers {
+    users {
+      id
+      email
+      password
+    }
+  }
+`;
+
+// GraphQL Query for creating a new user
 const CREATE_NEW_USER = gql`
   mutation registerNewUser($email: String!, $password: String!) {
     register(input: { email: $email, password: $password }) {
@@ -12,34 +27,55 @@ const CREATE_NEW_USER = gql`
     }
   }
 `;
-// TODO: PASSWORD RESTRICTIONS: minimum of 8 chars, one uppercase, one lowercase, one digit
-const SignInForm = () => {
-  const [registerNewUser, { mutData }] = useMutation(CREATE_NEW_USER);
-  const { push } = useHistory();
 
+// Email and Password requirement authentications
+const schema = yup.object().shape({
+  Email: yup
+    .string()
+    .required('Email required')
+    .email('Email is required'),
+  // PASSWORD RESTRICTIONS: minimum of 8 chars, one uppercase, one lowercase, one digit
+  Password: yup
+    .string()
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+      'Must Contain 8 Characters, a Uppercase, a Lowercase, and a Number.'
+    ),
+});
+
+// The form for creating users
+const CreateUserForm = () => {
+  // Setting state for Form
   const [data, setData] = useState([
     {
-      eMail: '',
-      passWord: '',
+      Email: '',
+      Password: '',
     },
   ]);
 
+  // useMutation/useQuery hooks come from ApolloClient, allows us to connect the Front-End with the Backend GraphQL API.
+  const [registerNewUser, { mutData }] = useMutation(CREATE_NEW_USER, {
+    refetchQueries: ['getUsers'],
+  });
+  const { push } = useHistory();
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  // Handles changes in the form
   const handleChange = event => {
     setData({
       ...data,
       [event.target.name]: event.target.value,
     });
-    console.log(data);
   };
 
-  const onSubmit = e => {
-    // props.addNewAdmin(data);
-    push('/dashboard');
-    e.preventDefault();
+  // Handles the form submit
+  const onSubmit = () => {
     registerNewUser({
-      variables: { email: data.eMail, password: data.passWord },
+      variables: { email: data.Email, password: data.Password },
     });
-    console.log(data.eMail, data.passWord);
+    push('/dashboard');
   };
 
   return (
@@ -50,33 +86,32 @@ const SignInForm = () => {
       <div className="signUpForm">
         <h1 className="title">Create a New Admin</h1>
 
-        <form
-          className="form"
-          onSubmit={e => {
-            onSubmit(e);
-          }}
-        >
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
           <label className="emailBox" htmlFor="email">
             <input
-              className="email"
               placeholder="E-mail*"
-              type="email"
-              name="eMail"
+              type="text"
+              name="Email"
               onChange={event => handleChange(event)}
+              ref={register}
             />
+            {errors.Email && <p className="error">{errors.Email.message}</p>}
           </label>
           <label className="passwordBox" htmlFor="password">
             <input
-              className="password"
               placeholder="Password*"
               type="text"
-              name="passWord"
+              name="Password"
               onChange={event => handleChange(event)}
+              ref={register}
             />
+            {errors.Password && (
+              <p className="error">{errors.Password.message}</p>
+            )}
           </label>
           <input className="submitButton" type="submit" value="Create Admin" />
           <p className="goBackInCreate">
-            Go back <Link to="/dashboard">Dashboard</Link>
+            Back to <Link to="/dashboard">Dashboard</Link>
           </p>
         </form>
       </div>
@@ -84,4 +119,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default CreateUserForm;
