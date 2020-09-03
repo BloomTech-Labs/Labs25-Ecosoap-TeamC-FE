@@ -1,6 +1,7 @@
 .title {
     display: flex;
     justify-content: center;
+    margin-right: 1%;
     text-align: center;
 }
 

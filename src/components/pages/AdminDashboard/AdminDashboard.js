@@ -2,15 +2,16 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useOktaAuth } from '@okta/okta-react';
 
-// import RenderHomePage from './RenderHomePage';
-import map from '../../../media/hub-map.png';
+import Map from '../../common/Map/Map.js';
 import logo from '../../../media/eco-soap-logo.png';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
-  const { authState, authService } = useOktaAuth();
+  // Establishing States below
   const [userInfo, setUserInfo] = useState(null);
-  // eslint-disable-next-line
+
+  // Using Okta NPM to establish that a user is logged in throughout the app usage.
+  const { authState, authService } = useOktaAuth();
   const [memoAuthService] = useMemo(() => [authService], []);
 
   useEffect(() => {
@@ -32,10 +33,6 @@ const AdminDashboard = () => {
     return () => (isSubscribed = false);
   }, [memoAuthService]);
 
-  // const SideBar = () => {};
-
-  console.log(userInfo);
-
   return (
     <div className="dashboard-layout">
       <div className="topTab">
@@ -45,7 +42,7 @@ const AdminDashboard = () => {
 
       <section className="dashboardSection">
         <div className="leftTab">
-          <img id="eco-soap-map" src={map} alt="eco-soap bank map" />
+          <Map className="eco-soap-map" />
         </div>
 
         <div className="rightTab">
@@ -58,6 +55,12 @@ const AdminDashboard = () => {
           <button className="button" type="primary">
             <Link to="/users" className="links">
               Manage Users
+            </Link>
+          </button>
+
+          <button className="button" type="primary">
+            <Link to="/manage-waypoints" className="links">
+              Map Management
             </Link>
           </button>
 

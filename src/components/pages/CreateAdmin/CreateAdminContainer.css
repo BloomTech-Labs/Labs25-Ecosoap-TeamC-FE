@@ -1,5 +1,12 @@
 .error {
     color: red;
+    position: absolute;
+    z-index: 10;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    margin-left: 25%;
+    border: 1px solid black;
 }
 
 .formContainer {
@@ -44,16 +51,10 @@
     margin-top: -10%;
     padding: 5% 0%;
 }
-.email {
-    border-radius: 3px;
-}
 
 .passwordBox {
     margin-bottom: 6%;
     padding: 5% 0%;
-}
-.password {
-    border-radius: 3px;
 }
 
 .submitButton {
@@ -141,6 +142,5 @@
     }
     .title {
         margin-left: 2%;
-        /* border: 1px solid red; */
     }
 }
