@@ -23,7 +23,7 @@ import { LoadingComponent } from './components/common';
 import { CreateAdminCont } from './components/pages/CreateAdmin';
 import { AdminDashboard } from './components/pages/AdminDashboard';
 import { UsersList } from './components/pages/UsersList';
-import { ManageWaypoints } from './components/pages/ManageWaypoints';
+import { MapManagement } from './components/pages/MapManagement';
 
 const client = new ApolloClient({
   uri: 'http://35.208.9.187:9093/web-api-3',
@@ -57,7 +57,7 @@ function App() {
           <Route path="/login" component={LoginPage} />
           <Route path="/dashboard" component={AdminDashboard} />
           <Route path="/users" component={UsersList} />
-          <Route path="/manage-waypoints" component={ManageWaypoints} />
+          <Route path="/manage-waypoints" component={MapManagement} />
           <Route path="/create-user" component={CreateAdminCont} />
           <Route path="/implicit/callback" component={LoginCallback} />
           {/* any of the routes you need secured should be registered as SecureRoutes */}

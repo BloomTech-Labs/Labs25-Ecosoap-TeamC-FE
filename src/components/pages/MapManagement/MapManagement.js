@@ -1,7 +1,7 @@
 import React from 'react';
-import './ManageWaypoints.css';
+import './MapManagement.css';
 
-const ManageWaypoints = () => {
+const MapManagement = () => {
   return (
     <div>
       <h1>Map Management</h1>
@@ -44,4 +44,4 @@ const ManageWaypoints = () => {
   );
 };
 
-export default ManageWaypoints;
+export default MapManagement;
