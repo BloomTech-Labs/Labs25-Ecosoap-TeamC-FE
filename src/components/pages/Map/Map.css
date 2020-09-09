@@ -2,3 +2,14 @@
     color: black;
     border: 10px solid red;
 }
+
+.marker-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.marker-logo {
+    width: 30px;
+    height: 28px;
+}

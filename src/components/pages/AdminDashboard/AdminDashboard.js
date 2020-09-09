@@ -69,6 +69,7 @@ const AdminDashboard = () => {
             type="primary"
             onClick={() => authService.logout()}
           >
+            {/* NEED TO ADD LINK TO="" */}
             <Link className="links">Log out</Link>
           </button>
         </div>

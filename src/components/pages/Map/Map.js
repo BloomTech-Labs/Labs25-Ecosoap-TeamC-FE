@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { useQuery, useMutation, gql } from '@apollo/client';
+import logo from '../../../media/eco-soap-logo.png';
 import './Map.css';
 // import * as parkData from "./Skateboard_Parks.json";
 
@@ -26,8 +27,10 @@ const GET_RECORDS = gql`
     }
   }
 `;
+
 function Map() {
   const { loading, error, data } = useQuery(GET_RECORDS);
+  const [selectedMark, setSelectedMark] = useState(null);
   // const [newData, setNewData] = useState(parkData.default.features);
   // console.log("This is newdata! ",newData);
   const [viewport, setViewport] = useState({
@@ -37,7 +40,6 @@ function Map() {
     height: '50vh',
     zoom: 2,
   });
-  const [selectedMark, setSelectedMark] = useState(null);
 
   useEffect(() => {
     const listener = e => {
@@ -62,6 +64,7 @@ function Map() {
           setViewport(viewport);
         }}
       >
+        {data && console.log('THIS IS DATA: ', data.records)}
         {data &&
           data.records.map(item => (
             <Marker
@@ -70,64 +73,27 @@ function Map() {
               longitude={item.coordinates.longitude}
             >
               <button
-                className="marker-btn"
+                className="marker-button"
                 onClick={e => {
                   e.preventDefault();
                   setSelectedMark(item);
                 }}
               >
-                {/* <img src="/skateboarding.svg" alt="Skatepark Icon"/> */}
+                <img className="marker-logo" src={logo} alt="Logo" />
               </button>
             </Marker>
           ))}
 
-        {/* {console.log(parkData.default.features)} */}
-        {/* {newData.map((park) => (      
-        <Marker
-          key={park.properties.PARK_ID}
-          latitude={park.geometry.coordinates[1]}
-          longitude={park.geometry.coordinates[0]}
-          draggable={true}
-          // onDrag={(event) => {
-          //   // console.log(event.lngLat)
-          // }}
-          // onDragStart={(event) => {
-          //   // console.log("start!!!", event);
-          // }}
-          onDragEnd={(event) => {
-            setNewData(prev => {
-              return prev.map(m => 
-                m.properties.PARK_ID === park.properties.PARK_ID ? {
-                  ...m,
-                  geometry: {
-                    ...m.geometry, 
-                    coordinates: [event.lngLat[0], event.lngLat[1]]
-                  }
-                } : m
-              )
-            })
-          }}
-        >
-          <button className="marker-btn" onClick={(e) => {
-            e.preventDefault();
-            setSelectedMark(park);
-          }}>
-            <img src="/skateboarding.svg" alt="Skatepark Icon"/>
-          </button>
-        </Marker>
-      ))} */}
-
         {selectedMark ? (
           <Popup
-            latitude={selectedMark.geometry.coordinates[1]}
-            longitude={selectedMark.geometry.coordinates[0]}
+            latitude={selectedMark.coordinates.latitude}
+            longitude={selectedMark.coordinates.longitude}
             onClose={() => {
               setSelectedMark(null);
             }}
           >
             <div>
-              <h2>{selectedMark.properties.NAME}</h2>
-              <p>{selectedMark.properties.DESCRIPTION}</p>
+              <h2>{selectedMark.name}</h2>
             </div>
           </Popup>
         ) : null}
