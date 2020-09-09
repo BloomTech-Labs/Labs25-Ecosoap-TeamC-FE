@@ -1,0 +1,38 @@
+.waypointForm {
+    width: 25%;
+    height: 50vh;
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: column wrap;
+}
+
+.labelInFirstForm {
+    margin-top: 50%;
+}
+
+select {
+    margin-top: 50%;
+}
+
+.dropdown {
+    border: 2px solid black;
+}
+
+.waypointButton {
+    margin-top: 50%;
+    text-decoration-color: initial;
+    background-image: initial;
+    background-color: rgb(47, 145, 59);
+    color: rgb(232, 230, 227);
+}
+
+.mapInManagement {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.goBackLink {
+    margin-top: 5%;
+    font-size: 150%;
+}
