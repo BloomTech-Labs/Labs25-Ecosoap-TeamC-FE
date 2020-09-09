@@ -51,9 +51,13 @@ const MapManagement = () => {
             />
           </label>
           <select className="dropdown">
-            <option value="Hub">Select a hub:</option>
-            <option value="Hotel">Hotel</option>
-            <option value="Manufacturing Partner">Manufacturing Partner</option>
+            <optgroup label="Select a type:">
+              <option value="Hub">Hub</option>
+              <option value="Hotel">Hotel</option>
+              <option value="Manufacturing Partner">
+                Manufacturing Partner
+              </option>
+            </optgroup>
           </select>
           <label className="labelInFirstForm">
             <input
