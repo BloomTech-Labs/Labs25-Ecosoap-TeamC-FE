@@ -5,6 +5,41 @@ import { Modal } from 'react-responsive-modal';
 import Map from '../Map/Map';
 import './MapManagement.css';
 
+// const newRecord = gql`
+// mutation newRecord {
+//   createRecord(input: {
+//     typeId: "TypeId1",
+//     name: "Eco-Soap Bank Madagascar",
+//     coordinates: {
+//       latitude: 111211.2,
+//       longitude: -113111.2
+//     }
+//     fields: {
+//       name: "women employed",
+//       value: "7"
+//     }
+//   }) {
+//     record {
+//       id
+//       name
+//       type {
+//         id
+//         name
+//       }
+//       coordinates {
+//         latitude
+//         longitude
+//       }
+//       fields {
+//         id
+//         name
+//         value
+//       }
+//     }
+//   }
+// }`
+// ;
+
 const MapManagement = () => {
   const [open, setOpen] = useState(false);
   const [recordData, setRecordData] = useState('');
