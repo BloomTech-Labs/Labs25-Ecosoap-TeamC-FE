@@ -5,9 +5,44 @@ import { Modal } from 'react-responsive-modal';
 import Map from '../Map/Map';
 import './MapManagement.css';
 
+// const newRecord = gql`
+// mutation newRecord {
+//   createRecord(input: {
+//     typeId: "TypeId1",
+//     name: "Eco-Soap Bank Madagascar",
+//     coordinates: {
+//       latitude: 111211.2,
+//       longitude: -113111.2
+//     }
+//     fields: {
+//       name: "women employed",
+//       value: "7"
+//     }
+//   }) {
+//     record {
+//       id
+//       name
+//       type {
+//         id
+//         name
+//       }
+//       coordinates {
+//         latitude
+//         longitude
+//       }
+//       fields {
+//         id
+//         name
+//         value
+//       }
+//     }
+//   }
+// }`
+// ;
+
 const MapManagement = () => {
   const [open, setOpen] = useState(false);
-  const [waypointData, setWaypointData] = useState('');
+  const [recordData, setRecordData] = useState('');
 
   // Opens Form Modal
   const onOpenModal = () => {
@@ -30,17 +65,30 @@ const MapManagement = () => {
   };
 
   const handleChange = event => {
-    setWaypointData({
-      ...waypointData,
+    setRecordData({
+      ...recordData,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const onSubmit = e => {
+    e.preventDefault();
+    console.log('This is record data: ', recordData);
+
+    // Line below can be added, if we want to CLOSE the form when Admin updates user, but this will conflict a bit with
+    onCloseModal();
   };
 
   return (
     <div>
       <h1>Map Management</h1>
       <Modal open={open} onClose={onCloseModal} center>
-        <form className="waypointForm">
+        <form
+          className="waypointForm"
+          onSubmit={e => {
+            onSubmit(e);
+          }}
+        >
           <label className="labelInFirstForm">
             <input
               placeholder="Location Name"
@@ -50,8 +98,13 @@ const MapManagement = () => {
               // ref={register}
             />
           </label>
-          <select className="dropdown">
-            <option value="Hub">Select a hub:</option>
+          <select
+            className="dropdown"
+            name="location-type"
+            onChange={event => handleChange(event)}
+          >
+            <option label="Select a type:" />
+            <option value="Hub">Hub</option>
             <option value="Hotel">Hotel</option>
             <option value="Manufacturing Partner">Manufacturing Partner</option>
           </select>
