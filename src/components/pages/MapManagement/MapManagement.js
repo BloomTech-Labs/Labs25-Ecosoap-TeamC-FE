@@ -2,43 +2,33 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
+import { useQuery, useMutation, gql } from '@apollo/client';
 import Map from '../Map/Map';
 import './MapManagement.css';
 
-// const newRecord = gql`
-// mutation newRecord {
-//   createRecord(input: {
-//     typeId: "TypeId1",
-//     name: "Eco-Soap Bank Madagascar",
-//     coordinates: {
-//       latitude: 111211.2,
-//       longitude: -113111.2
-//     }
-//     fields: {
-//       name: "women employed",
-//       value: "7"
-//     }
-//   }) {
-//     record {
-//       id
-//       name
-//       type {
-//         id
-//         name
-//       }
-//       coordinates {
-//         latitude
-//         longitude
-//       }
-//       fields {
-//         id
-//         name
-//         value
-//       }
-//     }
-//   }
-// }`
-// ;
+// let fieldValues = values.fields ? inspect(values.fields).split("'").join('"') : "[]";
+
+let NEW_RECORD_MUT = gql`
+  mutation registerNewRecord {
+    createRecord(
+      input: {
+        typeId: "Factory"
+        name: "Chocolate Factory"
+        coordinates: { latitude: 11.67, longitude: -20.11 }
+        fields: "[]"
+      }
+    ) {
+      record {
+        id
+        name
+        coordinates {
+          latitude
+          longitude
+        }
+      }
+    }
+  }
+`;
 
 const MapManagement = () => {
   const [open, setOpen] = useState(false);
@@ -46,21 +36,11 @@ const MapManagement = () => {
 
   // Opens Form Modal
   const onOpenModal = () => {
-    // setUserInfo({
-    //   id: id,
-    //   email: email,
-    //   password: password,
-    // });
     setOpen(true);
   };
 
   // Closes Form Modal
   const onCloseModal = () => {
-    // setUserInfo({
-    //   id: '',
-    //   email: '',
-    //   password: '',
-    // });
     setOpen(false);
   };
 
@@ -79,8 +59,19 @@ const MapManagement = () => {
     onCloseModal();
   };
 
+  const [registerNewRecord, { mutData }] = useMutation(NEW_RECORD_MUT);
+
   return (
     <div>
+      <button
+        onClick={e => {
+          e.preventDefault();
+          console.log('hello');
+          registerNewRecord();
+        }}
+      >
+        Submit Record
+      </button>
       <h1>Map Management</h1>
       <Modal open={open} onClose={onCloseModal} center>
         <form

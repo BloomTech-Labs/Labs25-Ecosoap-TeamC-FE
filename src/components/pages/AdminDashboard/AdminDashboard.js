@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useOktaAuth } from '@okta/okta-react';
+import MainSideBarComp from '../MainSideBar/MainSideBarComp';
 
 import Map from '../Map/Map';
 import logo from '../../../media/eco-soap-logo.png';
@@ -74,6 +75,7 @@ const AdminDashboard = () => {
           </button>
         </div>
       </section>
+      <MainSideBarComp />
     </div>
   );
 };
