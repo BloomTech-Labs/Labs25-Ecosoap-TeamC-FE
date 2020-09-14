@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import logo from '../../../media/eco-soap-logo.png';
+import marker from '../../../media/markerLogo.png';
 import './Map.css';
 // import * as parkData from "./Skateboard_Parks.json";
 
@@ -79,7 +80,7 @@ function Map() {
                   setSelectedMark(item);
                 }}
               >
-                <img className="marker-logo" src={logo} alt="Logo" />
+                <img className="marker-logo" src={marker} alt="Logo" />
               </button>
             </Marker>
           ))}
