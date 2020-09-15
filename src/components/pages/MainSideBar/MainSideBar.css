@@ -1,0 +1,101 @@
+.navbar {
+  height: 80px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.menu-bars {
+  margin-left: 2rem;
+  font-size: 2rem;
+  background: none;
+}
+
+.nav-menu {
+  width: 285px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: 850ms;
+}
+
+.nav-text {
+  display: flex;
+  align-items: center;
+  margin: 8px 0px 10px 0px;
+  list-style: none;
+  height: 60px;
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: #9fa2b4;
+  font-size: 18px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+
+  /* Line below is what makes all the LI tags go to the end in the NAV. */
+  justify-content: flex-end;
+}
+
+.nav-text a:hover {
+  color: #60b158;
+  background-color: whitesmoke;
+  border-right: 5px solid #8bcf1c;
+}
+
+.nav-menu-items {
+  width: 100%;
+  background: white;
+}
+
+span {
+  margin-right: 22px;
+}
+
+body {
+  background: lightgray;
+}
+
+#navBarLogo {
+  width: 175px;
+  height: 175px;
+  margin: 15%;
+  margin-bottom: 20%;  
+}
+
+.mainLI {
+  list-style: none;
+}
+
+.logout-text {
+  display: flex;
+  align-items: center;
+  margin: 250px 0px 10px 0px;
+  list-style: none;
+  height: 60px;
+}
+
+.logout-text a {
+  text-decoration: none;
+  color: #9fa2b4;
+  font-size: 18px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  justify-content: flex-end;
+}
+
+.logout-text a:hover {
+  color: #60b158;
+  background-color: whitesmoke;
+  border-right: 5px solid #8bcf1c;
+}
