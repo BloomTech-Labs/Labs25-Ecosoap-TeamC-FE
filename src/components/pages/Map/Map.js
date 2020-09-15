@@ -42,6 +42,7 @@ function Map() {
     zoom: 2,
   });
 
+  // geolocateStyle allows for styling the track-location icon, CSS can't be put in className.
   const geolocateStyle = {
     position: 'absolute',
     top: 0,
