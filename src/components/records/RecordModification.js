@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, gql } from '@apollo/client';
-import './RecordModification.css';
 
-let GET_RECORDS = gql`
+export const GET_RECORDS = gql`
   query getRecords {
     records {
       id
@@ -22,8 +21,7 @@ let GET_RECORDS = gql`
   }
 `;
 
-// Add Record Not Working Yet
-let ADD_RECORD = gql`
+export const ADD_RECORD = gql`
   mutation registerNewRecord(
     $typeId: ID!
     $name: String!
@@ -54,7 +52,38 @@ let ADD_RECORD = gql`
   }
 `;
 
-let DELETE_RECORD = gql`
+export const UPDATE_RECORD = gql`
+  mutation updateRecord(
+    $id: ID!
+    $name: String!
+    $coordinates: CoordinatesInput!
+    $fields: [FieldInput!]
+  ) {
+    updateRecord(
+      input: {
+        id: $id
+        name: $name
+        coordinates: $coordinates
+        fields: $fields
+      }
+    ) {
+      record {
+        id
+        name
+        coordinates {
+          latitude
+          longitude
+        }
+        fields {
+          name
+          value
+        }
+      }
+    }
+  }
+`;
+
+export const DELETE_RECORD = gql`
   mutation deleteRecord($id: ID!) {
     deleteRecord(input: { id: $id }) {
       success
@@ -62,9 +91,3 @@ let DELETE_RECORD = gql`
     }
   }
 `;
-
-const RecordModification = () => {
-  return <h1>Test</h1>;
-};
-
-export default RecordModification;

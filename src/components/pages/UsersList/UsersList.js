@@ -3,6 +3,11 @@ import './UsersList.css';
 import logo from '../../../media/eco-soap-logo.png';
 import { Link } from 'react-router-dom';
 import { useQuery, useMutation, gql } from '@apollo/client';
+import {
+  GET_USERS,
+  UPDATE_USER,
+  DELETE_USER,
+} from '../../users/UserModification.js';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import * as yup from 'yup';
@@ -23,43 +28,6 @@ const schema = yup.object().shape({
     ),
 });
 
-// Three queries/mutations below make calls to our backend graphQL.
-// Graph QL query to get all users
-const GET_USER_QUERY = gql`
-  query getUsers {
-    users {
-      id
-      email
-      password
-    }
-  }
-`;
-
-// Graph QL Mutation to edit user information
-const EDIT_USER_MUTATION = gql`
-  mutation editUser($userId: ID!, $email: String!, $password: String!) {
-    updateUserProfile(
-      input: { userId: $userId, email: $email, password: $password }
-    ) {
-      user {
-        id
-        email
-        password
-      }
-    }
-  }
-`;
-
-// Graph QL Mutation to delete a user from the database
-const DELETE_ADMIN_MUTATION = gql`
-  mutation deleteAdmin($email: String!) {
-    deleteUser(input: { email: $email }) {
-      success
-      error
-    }
-  }
-`;
-
 const UsersList = () => {
   // State variables, for Form Modal, and Form State.
   const [open, setOpen] = useState(false);
@@ -71,13 +39,13 @@ const UsersList = () => {
   });
 
   // useMutation/useQuery hooks come from ApolloClient, allows us to connect the Front-End with the Backend GraphQL API.
-  const [deleteAdmin] = useMutation(DELETE_ADMIN_MUTATION, {
+  const [deleteAdmin] = useMutation(DELETE_USER, {
     refetchQueries: ['getUsers'],
   });
-  const [editUser] = useMutation(EDIT_USER_MUTATION, {
+  const [editUser] = useMutation(UPDATE_USER, {
     refetchQueries: ['getUsers'],
   });
-  const { loading, error, data } = useQuery(GET_USER_QUERY);
+  const { loading, error, data } = useQuery(GET_USERS);
   const deleteFunc = (e, email) => {
     e.preventDefault();
     deleteAdmin({

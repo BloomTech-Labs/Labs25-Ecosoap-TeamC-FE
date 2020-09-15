@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, gql } from '@apollo/client';
-import './TypeModification.css';
 
-let GET_TYPES = gql`
+export const GET_TYPES = gql`
   query getTypes {
     types {
       id
@@ -11,8 +10,7 @@ let GET_TYPES = gql`
   }
 `;
 
-// Add Type Not Yet Working
-let ADD_TYPE = gql`
+export const ADD_TYPE = gql`
   mutation createType($name: String!, $fields: [FieldInput]!) {
     createType(input: { name: $name, fields: $fields }) {
       type {
@@ -23,7 +21,25 @@ let ADD_TYPE = gql`
   }
 `;
 
-let DELETE_TYPE = gql`
+export const UPDATE_TYPE = gql`
+  mutation updateType(
+    $id: ID!
+    $name: String!
+    $fields: [FieldInput!]
+    $records: [RecordInput!]
+  ) {
+    updateType(
+      input: { id: $id, name: $name, fields: $fields, records: $records }
+    ) {
+      type {
+        id
+        name
+      }
+    }
+  }
+`;
+
+export const DELETE_TYPE = gql`
   mutation deleteType($id: ID!) {
     deleteType(input: { id: $id }) {
       success
@@ -31,9 +47,3 @@ let DELETE_TYPE = gql`
     }
   }
 `;
-
-const TypeModification = () => {
-  return <h1>Test</h1>;
-};
-
-export default TypeModification;
