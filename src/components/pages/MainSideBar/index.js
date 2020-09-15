@@ -1,1 +1,1 @@
-export { default as MainSideBar } from './MainSideBarCompjs';
+export { default as MainSideBar } from './MainSideBar';

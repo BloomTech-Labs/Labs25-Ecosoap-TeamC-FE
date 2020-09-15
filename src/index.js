@@ -24,6 +24,7 @@ import { CreateAdminCont } from './components/pages/CreateAdmin';
 import { AdminDashboard } from './components/pages/AdminDashboard';
 import { UsersList } from './components/pages/UsersList';
 import { MapManagement } from './components/pages/MapManagement';
+import { MainSideBar } from './components/pages/MainSideBar';
 
 const client = new ApolloClient({
   uri: 'http://35.208.9.187:9093/web-api-3',
@@ -53,6 +54,7 @@ function App() {
   return (
     <Security {...config} onAuthRequired={authHandler}>
       <ApolloProvider client={client}>
+        <MainSideBar />
         <Switch>
           <Route path="/login" component={LoginPage} />
           <Route path="/dashboard" component={AdminDashboard} />
