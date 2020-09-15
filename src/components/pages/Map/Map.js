@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import ReactMapGL, { Marker, Popup, GeolocateControl } from 'react-map-gl';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import logo from '../../../media/eco-soap-logo.png';
 import marker from '../../../media/markerLogo.png';
@@ -42,6 +42,13 @@ function Map() {
     zoom: 2,
   });
 
+  const geolocateStyle = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    margin: 10,
+  };
+
   useEffect(() => {
     const listener = e => {
       if (e.key === 'Escape') {
@@ -65,6 +72,7 @@ function Map() {
           setViewport(viewport);
         }}
       >
+        {/* Code snippet below maps over given data making the marker functionality*/}
         {data && console.log('THIS IS DATA: ', data.records)}
         {data &&
           data.records.map(item => (
@@ -84,7 +92,13 @@ function Map() {
               </button>
             </Marker>
           ))}
-
+        {/* Code snippet below allows the admin to see their location in the map real-time */}
+        <GeolocateControl
+          style={geolocateStyle}
+          positionOptions={{ enableHighAccuracy: true }}
+          trackUserLocation={true}
+        />
+        {/* Code snippet below allows a user to click on a marker in a map and see info for that marker specifically */}
         {selectedMark ? (
           <Popup
             latitude={selectedMark.coordinates.latitude}
