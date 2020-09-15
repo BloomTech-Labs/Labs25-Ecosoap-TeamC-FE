@@ -21,7 +21,7 @@ export const GET_RECORDS = gql`
   }
 `;
 
-export const ADD_RECORD = gql`
+export const NEW_RECORD = gql`
   mutation registerNewRecord(
     $typeId: ID!
     $name: String!
