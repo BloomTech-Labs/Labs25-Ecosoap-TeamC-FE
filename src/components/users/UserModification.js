@@ -12,7 +12,7 @@ export const GET_USERS = gql`
   }
 `;
 
-export const NEW_USERS = gql`
+export const NEW_USER = gql`
   mutation registerNewUser($email: String!, $password: String!) {
     register(input: { email: $email, password: $password }) {
       success

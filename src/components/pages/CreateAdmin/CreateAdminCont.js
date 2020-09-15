@@ -3,30 +3,10 @@ import { Link, useHistory } from 'react-router-dom';
 import './CreateAdminContainer.css';
 import logo from '../../../media/eco-soap-logo.png';
 import { useMutation, gql } from '@apollo/client';
+import { NEW_USER } from '../../users/UserModification.js';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';
 import { useForm } from 'react-hook-form';
-
-// Graph QL Query for getting all users ()
-const GET_USER_QUERY = gql`
-  query getUsers {
-    users {
-      id
-      email
-      password
-    }
-  }
-`;
-
-// GraphQL Query for creating a new user
-const CREATE_NEW_USER = gql`
-  mutation registerNewUser($email: String!, $password: String!) {
-    register(input: { email: $email, password: $password }) {
-      success
-      error
-    }
-  }
-`;
 
 // Email and Password requirement authentications
 const schema = yup.object().shape({
@@ -54,7 +34,7 @@ const CreateUserForm = () => {
   ]);
 
   // useMutation/useQuery hooks come from ApolloClient, allows us to connect the Front-End with the Backend GraphQL API.
-  const [registerNewUser, { mutData }] = useMutation(CREATE_NEW_USER, {
+  const [registerNewUser, { mutData }] = useMutation(NEW_USER, {
     refetchQueries: ['getUsers'],
   });
   const { push } = useHistory();
