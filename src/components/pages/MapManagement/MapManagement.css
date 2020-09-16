@@ -1,38 +1,62 @@
-.waypointForm {
-    width: 25%;
-    height: 50vh;
-    display: flex;
-    justify-content: flex-start;
-    flex-flow: column wrap;
+.waypointAddForm {
+  width: 70%;
+  height: 35vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: column wrap;
 }
 
-.labelInFirstForm {
-    margin-top: 50%;
+.FirstAddInput {
+  margin-top: 20%;
+}
+
+.waypointUpdateForm {
+  width: 70%;
+  height: 35vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: column wrap;
+}
+
+.FirstUpdateInput {
+  margin-top: 20%;
+}
+
+.waypointDeleteForm {
+  width: 70%;
+  height: 20vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: column wrap;
+}
+
+.FirstDeleteInput {
+  margin-top: 20%;
 }
 
 select {
-    margin-top: 50%;
+  margin-top: 20%;
 }
 
 .dropdown {
-    border: 2px solid black;
+  border: 2px solid black;
 }
 
 .waypointButton {
-    margin-top: 50%;
-    text-decoration-color: initial;
-    background-image: initial;
-    background-color: rgb(47, 145, 59);
-    color: rgb(232, 230, 227);
+  margin-top: 20%;
+  text-decoration-color: initial;
+  background-image: initial;
+  background-color: rgb(47, 145, 59);
+  color: rgb(232, 230, 227);
 }
 
 .mapInManagement {
-    display: flex;
-    justify-content: center;
-    margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
 }
 
 .goBackLink {
-    margin-top: 5%;
-    font-size: 150%;
+  margin-top: 5%;
+  font-size: 150%;
 }

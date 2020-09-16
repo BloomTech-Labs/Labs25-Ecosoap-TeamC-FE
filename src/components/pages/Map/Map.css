@@ -1,29 +1,29 @@
 #map {
-    margin: auto;
-    width: 100%;
-    height: 65vh;
+  margin: auto;
+  width: 100%;
+  height: 100vh;
 }
 
 .geocoder {
-    margin: auto;
-    margin-top: 30px;
+  margin: auto;
+  margin-top: 30px;
 }
 
 .mapboxgl-ctrl-geocoder {
-    min-width: 100%;
+  min-width: 100%;
 }
 
 section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 body {
-    background: lightgray;
+  background: lightgray;
 }
 
 .markerStyles {
-    height: 35px;
-    width: 35px;
+  height: 35px;
+  width: 35px;
 }

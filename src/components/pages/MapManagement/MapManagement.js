@@ -8,23 +8,69 @@ import Map from '../Map/Map';
 import './MapManagement.css';
 
 const MapManagement = () => {
-  const [open, setOpen] = useState(false);
-  const [recordData, setRecordData] = useState('');
+  const [openAdd, setOpenAdd] = useState(false);
+  const [openUpdate, setOpenUpdate] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
+  const [recordData, setRecordData] = useState({
+    name: '',
+    type: '',
+    coordinates: { latitude: 0, longitude: 0 },
+  });
 
-  // Opens Form Modal
-  const onOpenModal = () => {
-    setOpen(true);
+  // Opens Add Record Modal
+  const onOpenAddModal = () => {
+    setOpenAdd(true);
   };
 
-  // Closes Form Modal
-  const onCloseModal = () => {
-    setOpen(false);
+  // Closes Add Record Modal
+  const onCloseAddModal = () => {
+    setOpenAdd(false);
+  };
+
+  // Opens Update Record Modal
+  const onOpenUpdateModal = () => {
+    setOpenUpdate(true);
+  };
+
+  // Closes Update Record Modal
+  const onCloseUpdateModal = () => {
+    setOpenUpdate(false);
+  };
+
+  // Opens Delete Record Modal
+  const onOpenDeleteModal = () => {
+    setOpenDelete(true);
+  };
+
+  // Closes Delete Record Modal
+  const onCloseDeleteModal = () => {
+    setOpenDelete(false);
   };
 
   const handleChange = event => {
+    console.log(recordData);
     setRecordData({
       ...recordData,
       [event.target.name]: event.target.value,
+    });
+  };
+  const handleLatitudeChange = event => {
+    console.log('handleLatitudeChange: ', recordData);
+    setRecordData({
+      ...recordData,
+      coordinates: {
+        latitude: event.target.value,
+        longitude: parseFloat(recordData.coordinates.longitude),
+      },
+    });
+  };
+  const handleLongitudeChange = event => {
+    setRecordData({
+      ...recordData,
+      coordinates: {
+        latitude: recordData.coordinates.latitude,
+        longitude: event.target.value,
+      },
     });
   };
 
@@ -33,7 +79,7 @@ const MapManagement = () => {
     console.log('This is record data: ', recordData);
 
     // Line below can be added, if we want to CLOSE the form when Admin updates user, but this will conflict a bit with
-    onCloseModal();
+    onCloseAddModal();
   };
 
   const [registerNewRecord, { mutData }] = useMutation(NEW_RECORD);
@@ -50,14 +96,69 @@ const MapManagement = () => {
         Submit Record
       </button>
       <h1>Map Management</h1>
-      <Modal open={open} onClose={onCloseModal} center>
+      <Modal open={openAdd} onClose={onCloseAddModal} center>
         <form
-          className="waypointForm"
+          className="waypointAddForm"
           onSubmit={e => {
             onSubmit(e);
           }}
         >
-          <label className="labelInFirstForm">
+          <h3>Add Record</h3>
+          <label className="FirstAddInput">
+            <input
+              placeholder="Location Name"
+              type="text"
+              name="name"
+              onChange={event => handleChange(event)}
+              // ref={register}
+            />
+          </label>
+          <select
+            className="dropdown"
+            name="type"
+            onChange={event => handleChange(event)}
+          >
+            <option label="Select a type:" />
+            <option value="Hub">Hub</option>
+            <option value="Hotel">Hotel</option>
+            <option value="Manufacturing Partner">Manufacturing Partner</option>
+          </select>
+          <label className="FirstAddInput">
+            <input
+              id="number"
+              placeholder="Latitude"
+              type="number"
+              name="latitude"
+              onChange={event => handleLatitudeChange(event)}
+              // ref={register}
+            />
+          </label>
+          <label className="FirstAddInput">
+            <input
+              id="number"
+              placeholder="Longitude"
+              type="number"
+              name="longitude"
+              onChange={event => handleLongitudeChange(event)}
+              // ref={register}
+            />
+          </label>
+          <button className="waypointButton" type="submit">
+            {' '}
+            Submit new location
+          </button>
+        </form>
+      </Modal>
+
+      <Modal open={openUpdate} onClose={onCloseUpdateModal} center>
+        <form
+          className="waypointUpdateForm"
+          onSubmit={e => {
+            onSubmit(e);
+          }}
+        >
+          <h3>Update Record</h3>
+          <label className="FirstUpdateInput">
             <input
               placeholder="Location Name"
               type="text"
@@ -76,7 +177,7 @@ const MapManagement = () => {
             <option value="Hotel">Hotel</option>
             <option value="Manufacturing Partner">Manufacturing Partner</option>
           </select>
-          <label className="labelInFirstForm">
+          <label className="FirstUpdateInput">
             <input
               placeholder="Latitude"
               type="text"
@@ -85,7 +186,7 @@ const MapManagement = () => {
               // ref={register}
             />
           </label>
-          <label className="labelInFirstForm">
+          <label className="FirstUpdateInput">
             <input
               placeholder="Longitude"
               type="text"
@@ -100,8 +201,38 @@ const MapManagement = () => {
           </button>
         </form>
       </Modal>
-      <button onClick={e => onOpenModal()} className="button-modify">
-        Add new Location
+
+      <Modal open={openDelete} onClose={onCloseDeleteModal} center>
+        <form
+          className="waypointDeleteForm"
+          onSubmit={e => {
+            onSubmit(e);
+          }}
+        >
+          <h3>Delete Record</h3>
+          <label className="FirstDeleteInput">
+            <input
+              placeholder="Location to delete"
+              type="text"
+              name="location-name"
+              onChange={event => handleChange(event)}
+              // ref={register}
+            />
+          </label>
+          <button className="waypointButton" type="submit">
+            {' '}
+            Submit new location
+          </button>
+        </form>
+      </Modal>
+      <button onClick={e => onOpenAddModal()} className="button-modify">
+        Add New Record
+      </button>
+      <button onClick={e => onOpenUpdateModal()} className="button-modify">
+        Update Existing Record
+      </button>
+      <button onClick={e => onOpenDeleteModal()} className="button-modify">
+        Delete Record
       </button>
       <div className="mapInManagement">
         <Map />
