@@ -33,11 +33,9 @@ const AdminDashboard = () => {
   }, [memoAuthService]);
 
   return (
-    <section className="dashboardSection">
-      <div className="mapDiv">
-        <Map className="eco-soap-map" />
-      </div>
-    </section>
+    <>
+      <Map />
+    </>
   );
 };
 

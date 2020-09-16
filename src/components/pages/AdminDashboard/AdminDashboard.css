@@ -4,7 +4,7 @@
 
 .button {
     text-decoration: none;
-    background: #3BB54A;
+    /* background: #3BB54A; */
     color: #fff;
     font-size: 3vh;
     font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
@@ -22,10 +22,10 @@
     border: 3px solid #3BB54A;
 }
 
-.dashboardSection {
+/* .dashboardSection {
     display: flex;
     justify-content: center;
-}
+} */
 
 .mapDiv {
     /* margin-top: 2vw;

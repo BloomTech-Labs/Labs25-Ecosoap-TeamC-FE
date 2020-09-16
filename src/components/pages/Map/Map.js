@@ -52,12 +52,12 @@ function Map() {
     /*-------------- Inside Search-Bar functionality END --------------*/
 
     /*-------------- Outside Search-Bar functionality START --------------*/
-    var geocoder = new MapboxGeocoder({
-      accessToken: mapboxgl.accessToken,
-      mapboxgl: mapboxgl,
-    });
-    geocoder.onAdd(map);
-    geocoder.addTo('.geocoder');
+    // var geocoder = new MapboxGeocoder({
+    //   accessToken: mapboxgl.accessToken,
+    //   mapboxgl: mapboxgl,
+    // });
+    // geocoder.onAdd(map);
+    // geocoder.addTo('.geocoder');
     /*-------------- Outside Search-Bar functionality END --------------*/
 
     /*-------------- Track user functionality START --------------*/
@@ -95,7 +95,7 @@ function Map() {
 
   return (
     <>
-      <div className="geocoder" />
+      {/* <div className="geocoder" /> */}
       <div id="map" />
     </>
   );
