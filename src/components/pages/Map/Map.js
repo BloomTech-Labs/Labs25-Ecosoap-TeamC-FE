@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import ReactMapGL, { Marker, Popup, GeolocateControl } from 'react-map-gl';
+import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import { useQuery, useMutation, gql } from '@apollo/client';
-import logo from '../../../media/eco-soap-logo.png';
-import marker from '../../../media/markerLogo.png';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import './Map.css';
-// import * as parkData from "./Skateboard_Parks.json";
+import icon from '../../../media/eco-soap-logo.png';
+// import secondLogo from "../../../media/markerLogo.png";
 
-const REACT_APP_MAPBOX_TOKEN =
+mapboxgl.accessToken =
   'pk.eyJ1IjoibGFtYmRhbGFiczI1ZWNvc29hcCIsImEiOiJja2VhZWRhOG4wNmU5MnNxZXQ0bmhxZnU3In0.zWyuwunBSy51dulZG9gowQ';
 
 const GET_RECORDS = gql`
@@ -31,89 +32,78 @@ const GET_RECORDS = gql`
 
 function Map() {
   const { loading, error, data } = useQuery(GET_RECORDS);
-  const [selectedMark, setSelectedMark] = useState(null);
-  // const [newData, setNewData] = useState(parkData.default.features);
-  // console.log("This is newdata! ",newData);
-  const [viewport, setViewport] = useState({
-    latitude: 15,
-    longitude: 55,
-    width: '50vw',
-    height: '50vh',
-    zoom: 2,
-  });
-
-  const geolocateStyle = {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    margin: 10,
-  };
 
   useEffect(() => {
-    const listener = e => {
-      if (e.key === 'Escape') {
-        setSelectedMark(null);
-      }
-    };
-    window.addEventListener('keydown', listener);
+    // Snippet below is to initialize the map
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/lambdalabs25ecosoap/ckeaib2n30b4f19mq6mj2dsq3', // stylesheet location
+      center: [35, 25], // starting position [lng, lat]
+      zoom: 2, // starting zoom
+    });
 
-    return () => {
-      window.removeEventListener('keydown', listener);
-    };
-  }, []);
+    /*-------------- Inside Search-Bar functionality START --------------*/
+    map.addControl(
+      new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl,
+      })
+    );
+    /*-------------- Inside Search-Bar functionality END --------------*/
+
+    /*-------------- Outside Search-Bar functionality START --------------*/
+    var geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl,
+    });
+    geocoder.onAdd(map);
+    geocoder.addTo('.geocoder');
+    /*-------------- Outside Search-Bar functionality END --------------*/
+
+    /*-------------- Track user functionality START --------------*/
+    map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
+      })
+    );
+    /*-------------- Track user functionality END --------------*/
+
+    /*-------------- Marker functionality START --------------*/
+    // var marker = new mapboxgl.Marker()
+    //   .setLngLat([-74.5, 40]) // [lng, lat]
+    //   .addTo(map);
+    /*-------------- Marker functionality END --------------*/
+
+    data &&
+      data.records.forEach(marker => {
+        var el = document.createElement('img');
+        el.src = icon;
+        el.className = 'markerStyles';
+        el.onclick = () => {
+          console.log('hi', marker.name);
+        };
+        var popup = new mapboxgl.Popup({ offset: 25 }).setText(marker.name);
+
+        // var marker = new mapboxgl.Marker()     // Substitue for line below if we try adding icons.
+        new mapboxgl.Marker({ color: 'red', element: el })
+          // .setDraggable(true) allows for easy draggable markers
+          .setPopup(popup)
+          .setLngLat([
+            marker.coordinates.longitude,
+            marker.coordinates.latitude,
+          ]) // [lng, lat]
+          .addTo(map);
+      });
+  }, [data]);
 
   return (
-    <div className="mapCSS">
-      <ReactMapGL
-        {...viewport}
-        mapboxApiAccessToken={REACT_APP_MAPBOX_TOKEN}
-        mapStyle="mapbox://styles/lambdalabs25ecosoap/ckeaib2n30b4f19mq6mj2dsq3"
-        onViewportChange={viewport => {
-          setViewport(viewport);
-        }}
-      >
-        {/* Code snippet below maps over given data making the marker functionality*/}
-        {data && console.log('THIS IS DATA: ', data.records)}
-        {data &&
-          data.records.map(item => (
-            <Marker
-              key={item.id}
-              latitude={item.coordinates.latitude}
-              longitude={item.coordinates.longitude}
-            >
-              <button
-                className="marker-button"
-                onClick={e => {
-                  e.preventDefault();
-                  setSelectedMark(item);
-                }}
-              >
-                <img className="marker-logo" src={marker} alt="Logo" />
-              </button>
-            </Marker>
-          ))}
-        {/* Code snippet below allows the admin to see their location in the map real-time */}
-        <GeolocateControl
-          style={geolocateStyle}
-          positionOptions={{ enableHighAccuracy: true }}
-          trackUserLocation={true}
-        />
-        {/* Code snippet below allows a user to click on a marker in a map and see info for that marker specifically */}
-        {selectedMark ? (
-          <Popup
-            latitude={selectedMark.coordinates.latitude}
-            longitude={selectedMark.coordinates.longitude}
-            onClose={() => {
-              setSelectedMark(null);
-            }}
-          >
-            <div>
-              <h2>{selectedMark.name}</h2>
-            </div>
-          </Popup>
-        ) : null}
-      </ReactMapGL>
-    </div>
+    <>
+      <div className="geocoder" />
+      <div id="map" />
+    </>
   );
 }
 
