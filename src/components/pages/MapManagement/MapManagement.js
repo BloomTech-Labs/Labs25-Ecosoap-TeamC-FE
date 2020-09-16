@@ -3,32 +3,9 @@ import { Link, useHistory } from 'react-router-dom';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { useQuery, useMutation, gql } from '@apollo/client';
+import { NEW_RECORD } from '../../records/RecordModification.js';
 import Map from '../Map/Map';
 import './MapManagement.css';
-
-// let fieldValues = values.fields ? inspect(values.fields).split("'").join('"') : "[]";
-
-let NEW_RECORD_MUT = gql`
-  mutation registerNewRecord {
-    createRecord(
-      input: {
-        typeId: "Factory"
-        name: "Chocolate Factory"
-        coordinates: { latitude: 11.67, longitude: -20.11 }
-        fields: "[]"
-      }
-    ) {
-      record {
-        id
-        name
-        coordinates {
-          latitude
-          longitude
-        }
-      }
-    }
-  }
-`;
 
 const MapManagement = () => {
   const [open, setOpen] = useState(false);
@@ -59,7 +36,7 @@ const MapManagement = () => {
     onCloseModal();
   };
 
-  const [registerNewRecord, { mutData }] = useMutation(NEW_RECORD_MUT);
+  const [registerNewRecord, { mutData }] = useMutation(NEW_RECORD);
 
   return (
     <div>
