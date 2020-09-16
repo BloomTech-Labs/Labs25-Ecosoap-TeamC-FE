@@ -5,6 +5,12 @@ import * as IoIcons from 'react-icons/io';
 
 export const NavBarData = [
   {
+    title: 'Admin Dashboard',
+    path: '/dashboard',
+    icon: <FaIcons.FaCircle />,
+    cName: 'nav-text',
+  },
+  {
     title: 'Create New User',
     path: '/create-user',
     icon: <IoIcons.IoMdAddCircle />,

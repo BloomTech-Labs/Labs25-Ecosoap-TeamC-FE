@@ -10,20 +10,16 @@ function Navbar() {
     <nav className="nav-menu">
       <div className="nav-menu-items">
         <li className="mainLI">
-          <Link to="/dashboard">
-            <img id="navBarLogo" src={logo} alt="Eco-Soap Logo" />
-          </Link>
+          <img id="navBarLogo" src={logo} alt="Eco-Soap Logo" />
         </li>
-        {NavBarData.map((item, index) => {
-          return (
-            <li key={index} className={item.cName}>
-              <Link to={item.path}>
-                <span>{item.title}</span>
-                {item.icon}
-              </Link>
-            </li>
-          );
-        })}
+        {NavBarData.map((item, index) => (
+          <li key={index} className={item.cName}>
+            <Link to={item.path}>
+              <span>{item.title}</span>
+              {item.icon}
+            </Link>
+          </li>
+        ))}
       </div>
     </nav>
   );

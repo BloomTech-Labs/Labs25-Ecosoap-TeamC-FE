@@ -26,6 +26,8 @@ import { UsersList } from './components/pages/UsersList';
 import { MapManagement } from './components/pages/MapManagement';
 import { MainSideBar } from './components/pages/MainSideBar';
 
+import './index.css';
+
 const client = new ApolloClient({
   uri: 'http://35.208.9.187:9093/web-api-3',
   cache: new InMemoryCache(),

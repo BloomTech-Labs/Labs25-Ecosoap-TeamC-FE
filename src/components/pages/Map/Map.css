@@ -1,15 +1,29 @@
-.mapCss{
-    color: black;
-    border: 10px solid red;
+#map {
+    margin: auto;
+    width: 100%;
+    height: 65vh;
 }
 
-.marker-button {
-    background: none;
-    border: none;
-    cursor: pointer;
+.geocoder {
+    margin: auto;
+    margin-top: 30px;
 }
 
-.marker-logo {
-    width: 30px;
-    height: 28px;
+.mapboxgl-ctrl-geocoder {
+    min-width: 100%;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body {
+    background: lightgray;
+}
+
+.markerStyles {
+    height: 35px;
+    width: 35px;
 }

@@ -4,7 +4,7 @@
 
 .button {
     text-decoration: none;
-    background: #3BB54A;
+    /* background: #3BB54A; */
     color: #fff;
     font-size: 3vh;
     font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
@@ -14,20 +14,4 @@
 
 .links {
     color: #fff;
-}
-
-.mapboxgl-canvas {
-    width: 1050px;
-    height: 550px;
-    border: 3px solid #3BB54A;
-}
-
-.dashboardSection {
-    display: flex;
-    justify-content: center;
-}
-
-.mapDiv {
-    /* margin-top: 2vw;
-    margin-left: 7vw; */
 }
