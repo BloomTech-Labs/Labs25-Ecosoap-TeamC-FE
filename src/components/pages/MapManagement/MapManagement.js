@@ -7,30 +7,6 @@ import { NEW_RECORD } from '../../records/RecordModification.js';
 import Map from '../Map/Map';
 import './MapManagement.css';
 
-// let fieldValues = values.fields ? inspect(values.fields).split("'").join('"') : "[]";
-
-// let NEW_RECORD_MUT = gql`
-//   mutation registerNewRecord {
-//     createRecord(
-//       input: {
-//         typeId: "Factory"
-//         name: "Chocolate Factory"
-//         coordinates: { latitude: 11.67, longitude: -20.11 }
-//         fields: "[]"
-//       }
-//     ) {
-//       record {
-//         id
-//         name
-//         coordinates {
-//           latitude
-//           longitude
-//         }
-//       }
-//     }
-//   }
-// `;
-
 const MapManagement = () => {
   const [open, setOpen] = useState(false);
   const [recordData, setRecordData] = useState('');

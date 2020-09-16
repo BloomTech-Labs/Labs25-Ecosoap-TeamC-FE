@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, gql } from '@apollo/client';
 
+// Various GraphQL Queries for Record Modification
 export const GET_RECORDS = gql`
   query getRecords {
     records {
