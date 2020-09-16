@@ -13,3 +13,34 @@
     width: 30px;
     height: 28px;
 }
+
+#map {
+    margin: auto;
+    width: 1000px;
+    height: 500px;
+    margin-top: 60px;
+}
+  
+.geocoder {
+    margin: auto;
+    margin-top: 30px;
+}
+
+.mapboxgl-ctrl-geocoder {
+    min-width: 100%;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body {
+    background: lightgray;
+}
+
+.markerStyles {
+    height: 35px;
+    width: 35px;
+}
