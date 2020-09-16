@@ -20,6 +20,7 @@
   left: 0;
   top: 0;
   transition: 850ms;
+  z-index: 4;
 }
 
 .nav-text {
