@@ -71,12 +71,6 @@ function Map() {
     );
     /*-------------- Track user functionality END --------------*/
 
-    /*-------------- Marker functionality START --------------*/
-    // var marker = new mapboxgl.Marker()
-    //   .setLngLat([-74.5, 40]) // [lng, lat]
-    //   .addTo(map);
-    /*-------------- Marker functionality END --------------*/
-
     data &&
       data.records.forEach(marker => {
         var el = document.createElement('img');

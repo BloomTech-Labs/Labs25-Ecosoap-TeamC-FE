@@ -14,16 +14,14 @@ function Navbar() {
             <img id="navBarLogo" src={logo} alt="Eco-Soap Logo" />
           </Link>
         </li>
-        {NavBarData.map((item, index) => {
-          return (
-            <li key={index} className={item.cName}>
-              <Link to={item.path}>
-                <span>{item.title}</span>
-                {item.icon}
-              </Link>
-            </li>
-          );
-        })}
+        {NavBarData.map((item, index) => (
+          <li key={index} className={item.cName}>
+            <Link to={item.path}>
+              <span>{item.title}</span>
+              {item.icon}
+            </Link>
+          </li>
+        ))}
       </div>
     </nav>
   );

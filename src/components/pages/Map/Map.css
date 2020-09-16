@@ -1,26 +1,11 @@
-.mapCss{
-    color: black;
-    border: 10px solid red;
-}
-
-.marker-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.marker-logo {
-    width: 30px;
-    height: 28px;
-}
-
 #map {
     margin: auto;
     width: 1000px;
     height: 500px;
     margin-top: 60px;
+    /* z-index: -1; */
 }
-  
+
 .geocoder {
     margin: auto;
     margin-top: 30px;
