@@ -73,6 +73,7 @@ function Map() {
 
     data &&
       data.records.forEach(marker => {
+        console.log('map records: ', data.records);
         var el = document.createElement('img');
         el.src = icon;
         el.className = 'markerStyles';

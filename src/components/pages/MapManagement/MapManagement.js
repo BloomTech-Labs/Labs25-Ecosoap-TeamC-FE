@@ -13,7 +13,7 @@ const MapManagement = () => {
   const [openDelete, setOpenDelete] = useState(false);
   const [recordData, setRecordData] = useState({
     name: '',
-    type: '',
+    typeId: '',
     coordinates: { latitude: 0, longitude: 0 },
   });
 
@@ -54,29 +54,41 @@ const MapManagement = () => {
       [event.target.name]: event.target.value,
     });
   };
+  // Handles changes for Latitude specifically
   const handleLatitudeChange = event => {
     console.log('handleLatitudeChange: ', recordData);
     setRecordData({
       ...recordData,
       coordinates: {
-        latitude: event.target.value,
+        latitude: parseFloat(event.target.value),
         longitude: parseFloat(recordData.coordinates.longitude),
       },
+      fields: [],
     });
   };
+  // Handles changes for Longitude specifically
   const handleLongitudeChange = event => {
     setRecordData({
       ...recordData,
       coordinates: {
-        latitude: recordData.coordinates.latitude,
-        longitude: event.target.value,
+        latitude: parseFloat(recordData.coordinates.latitude),
+        longitude: parseFloat(event.target.value),
       },
+      fields: [],
     });
   };
 
   const onSubmit = e => {
     e.preventDefault();
     console.log('This is record data: ', recordData);
+    registerNewRecord({
+      variables: {
+        name: recordData.name,
+        typeId: recordData.typeId,
+        coordinates: recordData.coordinates,
+        fields: recordData.fields,
+      },
+    });
 
     // Line below can be added, if we want to CLOSE the form when Admin updates user, but this will conflict a bit with
     onCloseAddModal();
@@ -89,13 +101,13 @@ const MapManagement = () => {
       <button
         onClick={e => {
           e.preventDefault();
-          console.log('hello');
           registerNewRecord();
         }}
       >
         Submit Record
       </button>
       <h1>Map Management</h1>
+      {/* Modal for adding a new record */}
       <Modal open={openAdd} onClose={onCloseAddModal} center>
         <form
           className="waypointAddForm"
@@ -115,19 +127,18 @@ const MapManagement = () => {
           </label>
           <select
             className="dropdown"
-            name="type"
+            name="typeId"
             onChange={event => handleChange(event)}
           >
             <option label="Select a type:" />
-            <option value="Hub">Hub</option>
+            <option value="TypeId1">TypeId1</option>
             <option value="Hotel">Hotel</option>
             <option value="Manufacturing Partner">Manufacturing Partner</option>
           </select>
           <label className="FirstAddInput">
             <input
-              id="number"
               placeholder="Latitude"
-              type="number"
+              type="float"
               name="latitude"
               onChange={event => handleLatitudeChange(event)}
               // ref={register}
@@ -135,9 +146,8 @@ const MapManagement = () => {
           </label>
           <label className="FirstAddInput">
             <input
-              id="number"
               placeholder="Longitude"
-              type="number"
+              type="float"
               name="longitude"
               onChange={event => handleLongitudeChange(event)}
               // ref={register}
@@ -150,6 +160,7 @@ const MapManagement = () => {
         </form>
       </Modal>
 
+      {/* Modal for updating a record */}
       <Modal open={openUpdate} onClose={onCloseUpdateModal} center>
         <form
           className="waypointUpdateForm"
@@ -202,6 +213,7 @@ const MapManagement = () => {
         </form>
       </Modal>
 
+      {/* Modal for deleting a record */}
       <Modal open={openDelete} onClose={onCloseDeleteModal} center>
         <form
           className="waypointDeleteForm"
