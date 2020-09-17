@@ -3,18 +3,34 @@ import { Link, useHistory } from 'react-router-dom';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { useQuery, useMutation, gql } from '@apollo/client';
-import { NEW_RECORD } from '../../records/RecordModification.js';
+import {
+  NEW_RECORD,
+  UPDATE_RECORD,
+  DELETE_RECORD,
+} from '../../records/RecordModification.js';
 import Map from '../Map/Map';
 import './MapManagement.css';
 
 const MapManagement = () => {
   const [openAdd, setOpenAdd] = useState(false);
-  const [openUpdate, setOpenUpdate] = useState(false);
-  const [openDelete, setOpenDelete] = useState(false);
   const [recordData, setRecordData] = useState({
     name: '',
     typeId: '',
     coordinates: { latitude: 0, longitude: 0 },
+    fields: [],
+  });
+
+  const [openUpdate, setOpenUpdate] = useState(false);
+  const [recordUpdateData, setRecordUpdateData] = useState({
+    name: '',
+    typeId: '',
+    coordinates: { latitude: 0, longitude: 0 },
+    fields: [],
+  });
+
+  const [openDelete, setOpenDelete] = useState(false);
+  const [deleteRecordData, setDeleteRecordData] = useState({
+    id: '',
   });
 
   // Opens Add Record Modal
@@ -78,7 +94,15 @@ const MapManagement = () => {
     });
   };
 
-  const onSubmit = e => {
+  const handleDeleteChange = event => {
+    console.log(deleteRecordData);
+    setDeleteRecordData({
+      ...deleteRecordData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const onAddSubmit = e => {
     e.preventDefault();
     console.log('This is record data: ', recordData);
     registerNewRecord({
@@ -94,7 +118,36 @@ const MapManagement = () => {
     onCloseAddModal();
   };
 
+  const onUpdateSubmit = e => {
+    e.preventDefault();
+    console.log('This is record data: ', recordData);
+    updateRecord({
+      variables: {
+        name: recordData.name,
+        typeId: recordData.typeId,
+        coordinates: recordData.coordinates,
+        fields: recordData.fields,
+      },
+    });
+
+    // Line below can be added, if we want to CLOSE the form when Admin updates user, but this will conflict a bit with
+    onCloseAddModal();
+  };
+
+  const onDeleteSubmit = e => {
+    e.preventDefault();
+    console.log('This is record data: ', deleteRecordData);
+    deleteRecord({
+      variables: { id: deleteRecordData.id },
+    });
+
+    // Line below can be added, if we want to CLOSE the form when Admin updates user, but this will conflict a bit with
+    onCloseAddModal();
+  };
+
   const [registerNewRecord, { mutData }] = useMutation(NEW_RECORD);
+  const [updateRecord, { mutData2 }] = useMutation(UPDATE_RECORD);
+  const [deleteRecord, { mutData3 }] = useMutation(DELETE_RECORD);
 
   return (
     <div>
@@ -112,7 +165,7 @@ const MapManagement = () => {
         <form
           className="waypointAddForm"
           onSubmit={e => {
-            onSubmit(e);
+            onAddSubmit(e);
           }}
         >
           <h3>Add Record</h3>
@@ -165,7 +218,7 @@ const MapManagement = () => {
         <form
           className="waypointUpdateForm"
           onSubmit={e => {
-            onSubmit(e);
+            onUpdateSubmit(e);
           }}
         >
           <h3>Update Record</h3>
@@ -208,7 +261,7 @@ const MapManagement = () => {
           </label>
           <button className="waypointButton" type="submit">
             {' '}
-            Submit new location
+            Update Record
           </button>
         </form>
       </Modal>
@@ -218,7 +271,7 @@ const MapManagement = () => {
         <form
           className="waypointDeleteForm"
           onSubmit={e => {
-            onSubmit(e);
+            onDeleteSubmit(e);
           }}
         >
           <h3>Delete Record</h3>
@@ -226,14 +279,14 @@ const MapManagement = () => {
             <input
               placeholder="Location to delete"
               type="text"
-              name="location-name"
-              onChange={event => handleChange(event)}
+              name="id"
+              onChange={event => handleDeleteChange(event)}
               // ref={register}
             />
           </label>
           <button className="waypointButton" type="submit">
             {' '}
-            Submit new location
+            Delete Record
           </button>
         </form>
       </Modal>
