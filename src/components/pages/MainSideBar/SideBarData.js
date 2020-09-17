@@ -12,8 +12,14 @@ export const NavBarData = [
   },
   {
     title: 'Map Management',
-    path: '/manage-waypoints',
+    path: '/map-management',
     icon: <FaIcons.FaRegMap />,
+    cName: 'nav-text',
+  },
+  {
+    title: 'Type Management',
+    path: '/types',
+    icon: <IoIcons.IoMdSettings />,
     cName: 'nav-text',
   },
   {
@@ -26,12 +32,6 @@ export const NavBarData = [
     title: 'Manage Users',
     path: '/users',
     icon: <IoIcons.IoMdPeople />,
-    cName: 'nav-text',
-  },
-  {
-    title: 'Settings',
-    path: '/settings',
-    icon: <IoIcons.IoMdSettings />,
     cName: 'nav-text',
   },
   {

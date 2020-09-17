@@ -1,0 +1,19 @@
+.typeButton {
+    margin-top: 20%;
+    text-decoration-color: initial;
+    background-image: initial;
+    background-color: rgb(47, 145, 59);
+    color: rgb(232, 230, 227);
+}
+
+.DeleteForm {
+    width: 70%;
+    height: 20vh;
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: column wrap;
+  }
+  
+  .DeleteInput {
+    margin-top: 20%;
+  }

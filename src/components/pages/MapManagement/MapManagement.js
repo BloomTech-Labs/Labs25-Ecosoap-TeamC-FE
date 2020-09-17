@@ -162,7 +162,7 @@ const MapManagement = () => {
     });
 
     // Line below can be added, if we want to CLOSE the form when Admin updates user, but this will conflict a bit with
-    onCloseAddModal();
+    onCloseUpdateModal();
   };
 
   const onDeleteSubmit = e => {
@@ -173,7 +173,7 @@ const MapManagement = () => {
     });
 
     // Line below can be added, if we want to CLOSE the form when Admin updates user, but this will conflict a bit with
-    onCloseAddModal();
+    onCloseDeleteModal();
   };
 
   const [registerNewRecord, { mutData }] = useMutation(NEW_RECORD);
@@ -182,14 +182,6 @@ const MapManagement = () => {
 
   return (
     <div>
-      <button
-        onClick={e => {
-          e.preventDefault();
-          registerNewRecord();
-        }}
-      >
-        Submit Record
-      </button>
       <h1>Map Management</h1>
       {/* Modal for adding a new record */}
       <Modal open={openAdd} onClose={onCloseAddModal} center>
