@@ -22,8 +22,8 @@ const MapManagement = () => {
 
   const [openUpdate, setOpenUpdate] = useState(false);
   const [recordUpdateData, setRecordUpdateData] = useState({
+    id: '',
     name: '',
-    typeId: '',
     coordinates: { latitude: 0, longitude: 0 },
     fields: [],
   });
@@ -94,6 +94,37 @@ const MapManagement = () => {
     });
   };
 
+  const handleUpdateChange = event => {
+    console.log(recordUpdateData);
+    setRecordUpdateData({
+      ...recordUpdateData,
+      [event.target.name]: event.target.value,
+    });
+  };
+  // Handles changes for Latitude specifically
+  const handleLatitudeUpdateChange = event => {
+    console.log('handleLatitudeChange: ', recordUpdateData);
+    setRecordUpdateData({
+      ...recordUpdateData,
+      coordinates: {
+        latitude: parseFloat(event.target.value),
+        longitude: parseFloat(recordUpdateData.coordinates.longitude),
+      },
+      fields: [],
+    });
+  };
+  // Handles changes for Longitude specifically
+  const handleLongitudeUpdateChange = event => {
+    setRecordUpdateData({
+      ...recordUpdateData,
+      coordinates: {
+        latitude: parseFloat(recordUpdateData.coordinates.latitude),
+        longitude: parseFloat(event.target.value),
+      },
+      fields: [],
+    });
+  };
+
   const handleDeleteChange = event => {
     console.log(deleteRecordData);
     setDeleteRecordData({
@@ -120,13 +151,13 @@ const MapManagement = () => {
 
   const onUpdateSubmit = e => {
     e.preventDefault();
-    console.log('This is record data: ', recordData);
+    console.log('This is record data: ', recordUpdateData);
     updateRecord({
       variables: {
-        name: recordData.name,
-        typeId: recordData.typeId,
-        coordinates: recordData.coordinates,
-        fields: recordData.fields,
+        id: recordUpdateData.id,
+        name: recordUpdateData.name,
+        coordinates: recordUpdateData.coordinates,
+        fields: recordUpdateData.fields,
       },
     });
 
@@ -224,29 +255,28 @@ const MapManagement = () => {
           <h3>Update Record</h3>
           <label className="FirstUpdateInput">
             <input
-              placeholder="Location Name"
+              placeholder="Location ID"
               type="text"
-              name="location-name"
-              onChange={event => handleChange(event)}
+              name="id"
+              onChange={event => handleUpdateChange(event)}
               // ref={register}
             />
           </label>
-          <select
-            className="dropdown"
-            name="location-type"
-            onChange={event => handleChange(event)}
-          >
-            <option label="Select a type:" />
-            <option value="Hub">Hub</option>
-            <option value="Hotel">Hotel</option>
-            <option value="Manufacturing Partner">Manufacturing Partner</option>
-          </select>
+          <label className="FirstUpdateInput">
+            <input
+              placeholder="Location Name"
+              type="text"
+              name="name"
+              onChange={event => handleUpdateChange(event)}
+              // ref={register}
+            />
+          </label>
           <label className="FirstUpdateInput">
             <input
               placeholder="Latitude"
               type="text"
               name="latitude"
-              onChange={event => handleChange(event)}
+              onChange={event => handleLatitudeUpdateChange(event)}
               // ref={register}
             />
           </label>
@@ -255,7 +285,7 @@ const MapManagement = () => {
               placeholder="Longitude"
               type="text"
               name="longitude"
-              onChange={event => handleChange(event)}
+              onChange={event => handleLongitudeUpdateChange(event)}
               // ref={register}
             />
           </label>
