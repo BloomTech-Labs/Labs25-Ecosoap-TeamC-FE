@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import { useQuery, useMutation, gql } from '@apollo/client';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import PopUpBar from '../..//PopUpBar/PopUpBar';
+
+import icon from '../../../media/eco-soap-logo.png';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import './Map.css';
-import icon from '../../../media/eco-soap-logo.png';
-// import secondLogo from "../../../media/markerLogo.png";
 
 mapboxgl.accessToken =
   'pk.eyJ1IjoibGFtYmRhbGFiczI1ZWNvc29hcCIsImEiOiJja2VhZWRhOG4wNmU5MnNxZXQ0bmhxZnU3In0.zWyuwunBSy51dulZG9gowQ';
@@ -31,6 +32,7 @@ const GET_RECORDS = gql`
 `;
 
 function Map() {
+  const [currentMarker, setCurrentMarker] = useState([]);
   const { loading, error, data } = useQuery(GET_RECORDS);
 
   useEffect(() => {
@@ -77,7 +79,8 @@ function Map() {
         el.src = icon;
         el.className = 'markerStyles';
         el.onclick = () => {
-          console.log('hi', marker.name);
+          // console.log("hi ", marker.name);
+          setCurrentMarker(marker);
         };
         var popup = new mapboxgl.Popup({ offset: 25 }).setText(marker.name);
 
@@ -97,6 +100,7 @@ function Map() {
     <>
       {/* <div className="geocoder" /> */}
       <div id="map" />
+      <PopUpBar recordData={currentMarker} />
     </>
   );
 }
