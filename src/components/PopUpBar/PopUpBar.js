@@ -19,7 +19,7 @@ function PopUpBar(props) {
   }, [recordData]);
 
   return (
-    <div>
+    <>
       <Sidebar
         animation="overlay"
         direction="bottom"
@@ -74,14 +74,18 @@ function PopUpBar(props) {
                 <li className="liID1">Gallery</li>
                 <li
                   value={1}
-                  className={`liID2 ${popUpActive === 1 ? 'popUpActive' : ''}`}
+                  className={`liID2 ${
+                    popUpActive === 1 ? 'popUpActive' : 'popUpInactive'
+                  }`}
                   onClick={e => setPopUpActive(e.target.value)}
                 >
                   Photos
                 </li>
                 <li
                   value={2}
-                  className={`liID3 ${popUpActive === 2 ? 'popUpActive' : ''}`}
+                  className={`liID3 ${
+                    popUpActive === 2 ? 'popUpActive' : 'popUpInactive'
+                  }`}
                   onClick={e => setPopUpActive(e.target.value)}
                 >
                   Videos
@@ -95,7 +99,7 @@ function PopUpBar(props) {
           </div>
         )}
       </Sidebar>
-    </div>
+    </>
   );
 }
 

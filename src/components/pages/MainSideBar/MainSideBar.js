@@ -14,7 +14,7 @@ function Navbar() {
         </li>
         {NavBarData.map((item, index) => (
           <li key={index} className={item.cName}>
-            <Link to={item.path}>
+            <Link to={item.path} target="_blank" rel="noopener noreferrer">
               <span className="mainSideSpan">{item.title}</span>
               {item.icon}
             </Link>

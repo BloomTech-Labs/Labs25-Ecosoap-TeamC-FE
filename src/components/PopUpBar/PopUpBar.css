@@ -14,6 +14,14 @@
   outline:none;
 }
 
+.buttonClass:hover {
+  background: lightgray;
+}
+
+.buttonClass:active {
+  background: gray;
+}
+
 #xButton {
   font-size: 150%;
   font-weight: 700;
@@ -38,7 +46,8 @@
 
 .popUpBar {
   padding: 1%;
-  background: whitesmoke;
+  background: white;
+  z-index: 3!important;
 }
 
 .bigDiv {
@@ -110,4 +119,12 @@
   font-weight: bold;
   opacity: 100%;
   border-bottom: 5px solid lime;
+}
+
+.popUpInactive:hover {
+  opacity: 1;
+}
+
+.popUpInactive:active {
+  background-color: lightgray;
 }
