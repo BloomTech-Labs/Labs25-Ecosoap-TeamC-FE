@@ -20,11 +20,6 @@ function PopUpBar(props) {
 
   return (
     <div>
-      <Checkbox
-        checked={visible}
-        label={{ children: <code>visible</code> }}
-        onChange={(e, data) => setVisible(data.checked)}
-      />
       <Sidebar
         animation="overlay"
         direction="bottom"
@@ -32,21 +27,23 @@ function PopUpBar(props) {
         // onHide={() => setVisible(false)} Disabled because it closes the popup when moving around map!
         visible={visible}
       >
-        <div className="divClass">
-          <button
-            id="xButton"
-            className="buttonClass"
-            onClick={() => {
-              setVisible(!visible);
-            }}
-          >
-            X
-          </button>
-        </div>
+        {recordData.name && (
+          <div className="divClass">
+            <button
+              id="xButton"
+              className="buttonClass"
+              onClick={() => {
+                setVisible(!visible);
+              }}
+            >
+              X
+            </button>
+          </div>
+        )}
 
         {/* {console.log("This is recordData ", recordData)} */}
         {recordData.name && (
-          <div key={recordData.id} className="bigDiv">
+          <div className="bigDiv">
             <div className="recordDiv">
               <h1 id="recordTitle">{recordData.name}</h1>
               <div className="recordDetails">
@@ -56,7 +53,6 @@ function PopUpBar(props) {
                   {recordData.coordinates.latitude} ]
                 </h3>
                 {recordData.fields.map(field =>
-                  // console.log("THIS IS FIELD!", field),
                   field.name === 'Website' ? (
                     <h3>
                       Website:{' '}
@@ -73,11 +69,32 @@ function PopUpBar(props) {
               </div>
             </div>
 
-            <div className="galleryDiv"></div>
+            <div className="galleryDiv">
+              <div className="galleryTitles">
+                <li className="liID1">Gallery</li>
+                <li
+                  value={1}
+                  className={`liID2 ${popUpActive === 1 ? 'popUpActive' : ''}`}
+                  onClick={e => setPopUpActive(e.target.value)}
+                >
+                  Photos
+                </li>
+                <li
+                  value={2}
+                  className={`liID3 ${popUpActive === 2 ? 'popUpActive' : ''}`}
+                  onClick={e => setPopUpActive(e.target.value)}
+                >
+                  Videos
+                </li>
+              </div>
+              <Carousel
+                imageItems={recordData.fields}
+                popUpActive={popUpActive}
+              />
+            </div>
           </div>
         )}
       </Sidebar>
-      <Carousel />
     </div>
   );
 }
