@@ -124,7 +124,3 @@
 .popUpInactive:hover {
   opacity: 1;
 }
-
-.popUpInactive:active {
-  background-color: lightgray;
-}
