@@ -1,0 +1,53 @@
+.mainImages {
+  width: 100%;
+  height: 27vh;
+  /* border: 4px solid lime */
+  /* Remove the border! ^ */
+}
+
+/* 1 */
+.galleryCarousel {
+  display: flex;
+  margin-top: 4%;
+}
+
+/* 2 */
+.carouselMain {
+  width: 50%;
+}
+
+/* 2 */
+.carouselThumbs {
+  width: 100%;
+  margin: auto;
+}
+
+/* 3 */
+.thumbImages {
+  width: 100%;
+  cursor: pointer
+}
+
+/* 3 */
+.thumbNumbers {
+
+}
+
+/* 4 */
+.smallImages {
+  width: 25%;
+  margin: 0% 2% 2% 2%;
+}
+
+/* 4 */
+.thumbDigits {
+  cursor: pointer;
+}
+
+.individualDigit {
+  margin: auto 1%;
+}
+
+.displayTab {
+  display: none;
+}
