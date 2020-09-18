@@ -32,7 +32,7 @@ const GET_RECORDS = gql`
 `;
 
 function Map() {
-  const [currentMarker, setCurrentMarker] = useState([]);
+  const [currentMarker, setCurrentMarker] = useState(false);
   const { loading, error, data } = useQuery(GET_RECORDS);
 
   useEffect(() => {
