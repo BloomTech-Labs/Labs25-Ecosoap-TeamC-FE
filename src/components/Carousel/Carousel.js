@@ -1,10 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import AliceCarousel from 'react-alice-carousel';
+import ReactPlayer from 'react-player/lazy';
 
 import 'react-alice-carousel/lib/alice-carousel.css';
 import './Carousel.css';
 
-const items = [
+const images = [
   'https://i.imgur.com/VTpz8XB.jpg',
   'https://i.imgur.com/nff0PWy.jpg',
   'https://i.imgur.com/fY311wc.jpeg',
@@ -13,11 +14,12 @@ const items = [
   'https://i.imgur.com/xnoLgTy.jpeg',
 ];
 
-const images = [
-  'https://i.imgur.com/VTpz8XB.jpg',
-  'https://i.imgur.com/nff0PWy.jpg',
-  'https://i.imgur.com/fY311wc.jpeg',
-  'https://i.imgur.com/BaGeu7F.jpeg',
+const videos = [
+  'https://www.youtube.com/watch?v=5Y0CaCn-hd8',
+  'https://www.youtube.com/watch?v=C6ZqJ-5v3o4&list=LL9DN5AIo4LNrmpHHpXVFwtw&index=13&t=0s',
+  'https://www.youtube.com/watch?v=KmlMQtMkywo&list=LL9DN5AIo4LNrmpHHpXVFwtw&index=7&t=0s',
+  'https://www.youtube.com/watch?v=gwVb1nLPBkA&list=LL9DN5AIo4LNrmpHHpXVFwtw&index=8&t=215s',
+  'https://www.youtube.com/watch?v=KmlMQtMkywo&list=LL9DN5AIo4LNrmpHHpXVFwtw&index=7&t=0s',
 ];
 
 function Carousel(props) {
@@ -29,12 +31,21 @@ function Carousel(props) {
     window.dispatchEvent(new Event('resize'));
   }, [props.popUpActive]);
 
-  const galleryItems = items.map((image, index) => (
-    <img alt="img" className="mainImages" key={index + 20} src={image} />
+  const galleryItems = images.map((image, index) => (
+    <img alt={`${index}`} className="mainImages" key={index + 20} src={image} />
   ));
 
-  const galleryVideos = images.map((image, index) => (
-    <img alt="img" className="mainImages" key={index + 20} src={image} />
+  const galleryVideos = videos.map((video, index) => (
+    <div className="player-wrapper">
+      <ReactPlayer
+        className="react-player"
+        key={index + 20}
+        url={video}
+        controls
+        width="100%"
+        height="100%"
+      />
+    </div>
   ));
 
   const thumbItem = (item, index) => (
@@ -58,13 +69,21 @@ function Carousel(props) {
   );
 
   const secondThumbItem = (item, index) => (
-    <img
-      alt="Img"
-      key={index}
+    <div
+      className={`smallVideos`}
       onClick={() => SecondCarousel.slideTo(index)}
-      src={item}
-      className={`smallImages`}
-    />
+    >
+      <div className="player-wrapper-2">
+        <ReactPlayer
+          className="react-player-2"
+          key={index + 20}
+          url={item}
+          light
+          width="100%"
+          height="100%"
+        />
+      </div>
+    </div>
   );
 
   const secondNumberItem = (item, index) => (
@@ -89,14 +108,13 @@ function Carousel(props) {
             dotsDisabled={true}
             buttonsDisabled={true}
             items={galleryItems}
-            // responsive={responsive} Remove if one picture in Carousel displays
             ref={e => (Carousel = e)}
           />
         </div>
 
         <div className="carouselThumbs">
           <nav className="thumbImages">
-            {items.map((item, index) => thumbItem(item, index))}
+            {images.map((item, index) => thumbItem(item, index))}
           </nav>
           <div className="thumbNumbers">
             <button
@@ -107,7 +125,7 @@ function Carousel(props) {
               {`<`}
             </button>
             <span className="thumbDigits">
-              {items.map((item, index) => numberItem(item, index))}
+              {images.map((item, index) => numberItem(item, index))}
             </span>
             <button
               id="rightArrow"
@@ -120,7 +138,7 @@ function Carousel(props) {
         </div>
       </div>
 
-      {/* SECOND CAROUSEL FOR VIDEOS INSERT HERE! */}
+      {/* SECOND CAROUSEL FOR VIDEOS BELOW! */}
 
       <div
         className={`galleryCarousel ${
@@ -128,21 +146,19 @@ function Carousel(props) {
         }`}
       >
         <div className="carouselMain">
-          <AliceCarousel
+          <AliceCarousel // Second Carousel
             dotsDisabled={true}
             buttonsDisabled={true}
             items={galleryVideos}
-            mouseTrackingEnabled
-            // responsive={responsive} Remove if one picture in Carousel displays
             ref={e => (SecondCarousel = e)}
           />
         </div>
 
         <div className="carouselThumbs">
-          <nav className="thumbImages">
-            {images.map((item, index) => secondThumbItem(item, index))}
-          </nav>
-          <div className="thumbNumbers">
+          <div className="thumbVideos">
+            {videos.map((item, index) => secondThumbItem(item, index))}
+          </div>
+          <div>
             <button
               id="leftArrow"
               className="buttonClass"
@@ -151,7 +167,7 @@ function Carousel(props) {
               {`<`}
             </button>
             <span className="thumbDigits">
-              {images.map((item, index) => secondNumberItem(item, index))}
+              {videos.map((item, index) => secondNumberItem(item, index))}
             </span>
             <button
               id="rightArrow"
