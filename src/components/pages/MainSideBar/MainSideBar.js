@@ -15,7 +15,7 @@ function Navbar() {
         {NavBarData.map((item, index) => (
           <li key={index} className={item.cName}>
             <Link to={item.path}>
-              <span>{item.title}</span>
+              <span className="mainSideSpan">{item.title}</span>
               {item.icon}
             </Link>
           </li>
