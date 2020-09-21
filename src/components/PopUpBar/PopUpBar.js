@@ -27,7 +27,7 @@ function PopUpBar(props) {
         // onHide={() => setVisible(false)} Disabled because it closes the popup when moving around map!
         visible={visible}
       >
-        {recordData.name && (
+        {
           <div className="divClass">
             <button
               id="xButton"
@@ -39,7 +39,7 @@ function PopUpBar(props) {
               X
             </button>
           </div>
-        )}
+        }
 
         {/* {console.log("This is recordData ", recordData)} */}
         {recordData.name && (

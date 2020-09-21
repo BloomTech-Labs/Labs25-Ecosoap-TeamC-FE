@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import {
   GET_TYPES,
@@ -10,6 +11,7 @@ import { Modal } from 'react-responsive-modal';
 import './TypeManagement.css';
 
 const TypeManagement = () => {
+  const { loading, error, data } = useQuery(GET_TYPES);
   const [openAdd, setOpenAdd] = useState(false);
   const [typeData, setTypeData] = useState({
     name: '',
@@ -210,6 +212,35 @@ const TypeManagement = () => {
       <button onClick={e => onOpenDeleteModal()} className="button-modify">
         Delete Type
       </button>
+      <div className="page"></div>
+      <div className="types-form">
+        {loading && <p>Loading...</p>}
+        {error && (
+          <p>We're experiencing errors with the API! Please come back later.</p>
+        )}
+        {data &&
+          data.types.map(({ id, name }) => (
+            <div className="type-card" key={id}>
+              <p>{`Type ID: ${id}`}</p>
+              <p>{`Type Name: ${name}`}</p>
+              <button
+                // onClick={e => onOpenModal(id, name)}
+                className="button-modify"
+              >
+                Modify
+              </button>
+              <button
+                className="button-delete"
+                // onClick={e => deleteFunc(e, id)}
+              >
+                Delete
+              </button>
+            </div>
+          ))}
+      </div>
+      <p className="goBackLink">
+        Back to <Link to="/dashboard">Dashboard</Link>
+      </p>
     </div>
   );
 };

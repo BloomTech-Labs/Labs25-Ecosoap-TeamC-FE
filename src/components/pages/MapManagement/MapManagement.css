@@ -1,13 +1,24 @@
 .waypointAddForm {
   width: 70%;
-  height: 35vh;
+  height: 33vh;
   display: flex;
   justify-content: flex-start;
   flex-flow: column wrap;
 }
 
+.title {
+  margin-left: 20%;
+  margin-bottom: 0%;
+}
+
 .FirstAddInput {
   margin-top: 20%;
+  margin-left: 23%;
+}
+
+.dropdown {
+  margin-left: 23%;
+  border: 2px solid black;
 }
 
 .waypointUpdateForm {
@@ -38,12 +49,9 @@ select {
   margin-top: 20%;
 }
 
-.dropdown {
-  border: 2px solid black;
-}
-
 .waypointButton {
   margin-top: 20%;
+  margin-left: 23%;
   text-decoration-color: initial;
   background-image: initial;
   background-color: rgb(47, 145, 59);

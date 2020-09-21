@@ -58,7 +58,14 @@ function Map() {
     function flyToPoint(marker) {
       map.flyTo({
         center: [marker.coordinates.longitude, marker.coordinates.latitude],
-        zoom: 4,
+        zoom: 13,
+      });
+    }
+
+    function flyBackPoint(marker) {
+      map.flyTo({
+        center: [35, 25],
+        zoom: 2,
       });
     }
 

@@ -195,7 +195,7 @@ const MapManagement = () => {
             onAddSubmit(e);
           }}
         >
-          <h3>Add Record</h3>
+          <h3 className="title">Add Record</h3>
           <label className="FirstAddInput">
             <input
               placeholder="Location Name"
@@ -249,7 +249,7 @@ const MapManagement = () => {
             onUpdateSubmit(e);
           }}
         >
-          <h3>Update Record</h3>
+          <h3 className="title">Update Record</h3>
           <label className="FirstUpdateInput">
             <input
               placeholder="Location ID"
@@ -301,7 +301,7 @@ const MapManagement = () => {
             onDeleteSubmit(e);
           }}
         >
-          <h3>Delete Record</h3>
+          <h3 className="title">Delete Record</h3>
           <label className="FirstDeleteInput">
             <input
               placeholder="Location to delete"
