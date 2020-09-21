@@ -3,6 +3,7 @@ import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import { useQuery, useMutation, gql } from '@apollo/client';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import PopUpBar from '../..//PopUpBar/PopUpBar';
+import { GET_RECORDS } from '../../records/RecordModification.js';
 
 import icon from '../../../media/eco-soap-logo.png';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
@@ -11,29 +12,10 @@ import './Map.css';
 mapboxgl.accessToken =
   'pk.eyJ1IjoibGFtYmRhbGFiczI1ZWNvc29hcCIsImEiOiJja2VhZWRhOG4wNmU5MnNxZXQ0bmhxZnU3In0.zWyuwunBSy51dulZG9gowQ';
 
-const GET_RECORDS = gql`
-  query getRecords {
-    records {
-      id
-      name
-      type {
-        name
-      }
-      coordinates {
-        latitude
-        longitude
-      }
-      fields {
-        name
-        value
-      }
-    }
-  }
-`;
-
 function Map() {
   const [currentMarker, setCurrentMarker] = useState(false);
   const { loading, error, data } = useQuery(GET_RECORDS);
+  console.log(data);
 
   useEffect(() => {
     // Snippet below is to initialize the map
@@ -73,6 +55,13 @@ function Map() {
     );
     /*-------------- Track user functionality END --------------*/
 
+    function flyToPoint(marker) {
+      map.flyTo({
+        center: [marker.coordinates.longitude, marker.coordinates.latitude],
+        zoom: 4,
+      });
+    }
+
     data &&
       data.records.forEach(marker => {
         // console.log('map records: ', data.records);
@@ -82,6 +71,7 @@ function Map() {
         el.onclick = () => {
           // console.log("hi ", marker.name);
           setCurrentMarker(marker);
+          flyToPoint(marker);
         };
         var popup = new mapboxgl.Popup({ offset: 25 }).setText(marker.name);
 
