@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import {
@@ -8,7 +7,9 @@ import {
   UPDATE_RECORD,
   DELETE_RECORD,
 } from '../../records/RecordModification.js';
-import Map from '../Map/Map';
+import { GET_TYPES } from '../../types/TypeModification.js';
+
+import 'react-responsive-modal/styles.css';
 import './MapManagement.css';
 
 const MapManagement = () => {
@@ -175,8 +176,11 @@ const MapManagement = () => {
     // Line below can be added, if we want to CLOSE the form when Admin updates user, but this will conflict a bit with
     onCloseDeleteModal();
   };
-
-  const [registerNewRecord, { mutData }] = useMutation(NEW_RECORD);
+  const { loading, error, data } = useQuery(GET_TYPES);
+  console.log(data);
+  const [registerNewRecord, { mutData }] = useMutation(NEW_RECORD, {
+    refetchQueries: ['getTypes'],
+  });
   const [updateRecord, { mutData2 }] = useMutation(UPDATE_RECORD);
   const [deleteRecord, { mutData3 }] = useMutation(DELETE_RECORD);
 
@@ -207,9 +211,10 @@ const MapManagement = () => {
             onChange={event => handleChange(event)}
           >
             <option label="Select a type:" />
-            <option value="TypeId1">TypeId1</option>
-            <option value="Hotel">Hotel</option>
-            <option value="Manufacturing Partner">Manufacturing Partner</option>
+            {data &&
+              data.types.map(({ id, name }) => (
+                <option value={id}>{name}</option>
+              ))}
           </select>
           <label className="FirstAddInput">
             <input
@@ -321,9 +326,6 @@ const MapManagement = () => {
       <button onClick={e => onOpenDeleteModal()} className="button-modify">
         Delete Record
       </button>
-      <div className="mapInManagement">
-        <Map />
-      </div>
       <p className="goBackLink">
         Back to <Link to="/dashboard">Dashboard</Link>
       </p>
