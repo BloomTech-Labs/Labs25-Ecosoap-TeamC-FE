@@ -1,21 +1,10 @@
-.title {
+.user-list-page {
+    padding-left: 200px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    margin-right: 1%;
+    padding-top: 2%;
     text-align: center;
-}
-
-.eco-soap-logo {
-    width: 175px;
-    height: 175px;
-    margin-top: 1%;
-    align-items: center;
-}
-
-.page {
-    display: flex;
-    justify-content: center;
-    /* border: 1px solid red; */
 }
 
 .users-form {

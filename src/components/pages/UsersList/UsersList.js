@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import './UsersList.css';
-import logo from '../../../media/eco-soap-logo.png';
-import { Link } from 'react-router-dom';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import {
   GET_USERS,
@@ -95,12 +93,8 @@ const UsersList = () => {
   };
 
   return (
-    <div className="header">
-      <div>
-        <img className="eco-soap-logo" src={logo} alt="eco-soap bank logo" />
-      </div>
-      <h1 className="title">Admin Users</h1>
-      Back to <Link to="/dashboard">Dashboard</Link>
+    <div className="user-list-page">
+      <h1 className="title">Users</h1>
       <div className="page">
         <div className="users-form">
           {loading && <p>Loading...</p>}
