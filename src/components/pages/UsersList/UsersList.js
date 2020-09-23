@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './UsersList.css';
-import { useQuery, useMutation, gql } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import {
   GET_USERS,
   UPDATE_USER,
@@ -31,6 +31,11 @@ const UsersList = () => {
   const [open, setOpen] = useState(false);
   const [userInfo, setUserInfo] = useState('');
 
+  const [openDelete, setOpenDelete] = useState(false);
+  const [deleteUserData, setDeleteUserData] = useState({
+    email: '',
+  });
+
   // Form Authenticator below
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
@@ -44,10 +49,19 @@ const UsersList = () => {
     refetchQueries: ['getUsers'],
   });
   const { loading, error, data } = useQuery(GET_USERS);
+
   const deleteFunc = (e, email) => {
     e.preventDefault();
     deleteAdmin({
       variables: { email: email },
+    });
+  };
+
+  const handleDeleteChange = event => {
+    console.log(deleteUserData);
+    setDeleteUserData({
+      ...deleteUserData,
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -71,6 +85,24 @@ const UsersList = () => {
     setOpen(false);
   };
 
+  // Opens Delete Record Modal
+  const onOpenDeleteModal = () => {
+    setOpenDelete(true);
+  };
+
+  // Closes Delete Record Modal
+  const onCloseDeleteModal = () => {
+    setOpenDelete(false);
+  };
+
+  const onDeleteSubmit = e => {
+    e.preventDefault();
+    deleteUser({
+      variables: { email: deleteUserData },
+    });
+    onCloseDeleteModal();
+  };
+
   // Handles changes in the form
   const handleChange = event => {
     setUserInfo({
@@ -78,6 +110,10 @@ const UsersList = () => {
       [event.target.name]: event.target.value,
     });
   };
+
+  const [deleteUser, { mutData3 }] = useMutation(DELETE_USER, {
+    refetchQueries: ['getUsers'],
+  });
 
   // Handles the form submit
   const onSubmit = () => {
@@ -105,8 +141,12 @@ const UsersList = () => {
           )}
           <Modal open={open} onClose={onCloseModal} center>
             <h1>Edit user: </h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <label>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="modify-user-modal"
+            >
+              <label className="user-update">
+                <span>Email:&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <input
                   placeholder="E-mail*"
                   type="text"
@@ -121,7 +161,8 @@ const UsersList = () => {
               </label>
               <br />
 
-              <label>
+              <label className="user-update">
+                <span>Password:&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <input
                   placeholder="Password*"
                   type="text"
@@ -136,7 +177,27 @@ const UsersList = () => {
               </label>
               <br />
 
-              <input type="submit" value="Update Admin" />
+              <input
+                type="submit"
+                className="addWaypointButton"
+                value="Update Admin"
+              />
+            </form>
+          </Modal>
+
+          <Modal open={openDelete} onClose={onCloseDeleteModal} center>
+            <form
+              className="record-modal"
+              onSubmit={e => {
+                onDeleteSubmit(e);
+              }}
+            >
+              <h3 className="title">Delete Record</h3>
+              <h1>Are you sure you want to delete this record?</h1>
+              <button className="y-n-del-button" id="yesButton" type="submit">
+                Yes
+              </button>
+              <button className="y-n-del-button">No</button>
             </form>
           </Modal>
           {data &&
@@ -152,7 +213,11 @@ const UsersList = () => {
                 </button>
                 <button
                   className="button-delete"
-                  onClick={e => deleteFunc(e, email)}
+                  onClick={() => {
+                    setDeleteUserData(email);
+                    console.log(deleteUserData);
+                    onOpenDeleteModal();
+                  }}
                 >
                   Delete
                 </button>

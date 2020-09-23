@@ -1,6 +1,6 @@
 import React from 'react';
 import * as FaIcons from 'react-icons/fa';
-// import * as AiIcons from 'react-icons/ai';
+import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 
 export const NavBarData = [
@@ -36,7 +36,7 @@ export const NavBarData = [
   },
   {
     title: 'Log Out',
-    path: '/logout',
+    path: '/login',
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: 'logout-text',
   },

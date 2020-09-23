@@ -25,6 +25,8 @@
 }
 
 .button-modify {
+    cursor: pointer;
+    width: 20%;
     background: #3BB54A;
     color: #fff;
     font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
@@ -33,9 +35,21 @@
 }
 
 .button-delete {
+    cursor: pointer;
     background: #3BB54A;
     color: #fff;
     font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
     border-radius: 5px;
     border: solid 2px white;
+}
+
+.modify-user-modal {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    flex-flow: column wrap;
+}
+
+.user-update {
+    margin: 5% 0%;
 }
