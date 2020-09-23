@@ -25,7 +25,7 @@ import { AdminDashboard } from './components/pages/AdminDashboard';
 import { UsersList } from './components/pages/UsersList';
 import { MainSideBar } from './components/pages/MainSideBar';
 import { TypeManagement } from './components/pages/TypeManagement';
-import { RecordForm } from './components/RecordFormTESTING';
+import { RecordForm } from './components/RecordForm';
 
 import './index.css';
 
