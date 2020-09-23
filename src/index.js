@@ -25,11 +25,12 @@ import { AdminDashboard } from './components/pages/AdminDashboard';
 import { UsersList } from './components/pages/UsersList';
 import { MapManagement } from './components/pages/MapManagement';
 import { MainSideBar } from './components/pages/MainSideBar';
+import { TypeManagement } from './components/pages/TypeManagement';
 
 import './index.css';
 
 const client = new ApolloClient({
-  uri: 'http://35.208.9.187:9093/web-api-3',
+  uri: 'http://35.208.9.187:9097/web-api-dev',
   cache: new InMemoryCache(),
 });
 
@@ -60,9 +61,10 @@ function App() {
         <Switch>
           <Route path="/login" component={LoginPage} />
           <Route path="/dashboard" component={AdminDashboard} />
-          <Route path="/users" component={UsersList} />
-          <Route path="/manage-waypoints" component={MapManagement} />
+          <Route path="/map-management" component={MapManagement} />
           <Route path="/create-user" component={CreateAdminCont} />
+          <Route path="/users" component={UsersList} />
+          <Route path="/types" component={TypeManagement} />
           <Route path="/implicit/callback" component={LoginCallback} />
           {/* any of the routes you need secured should be registered as SecureRoutes */}
           <SecureRoute

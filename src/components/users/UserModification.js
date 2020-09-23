@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useQuery, useMutation, gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 // Various GraphQL Queries for User Modification
 export const GET_USERS = gql`

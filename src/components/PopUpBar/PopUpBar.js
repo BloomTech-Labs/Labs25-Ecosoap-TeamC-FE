@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Checkbox, Sidebar } from 'semantic-ui-react';
+import { Sidebar } from 'semantic-ui-react';
 import Carousel from '../Carousel/Carousel';
 
 import './PopUpBar.css';
@@ -27,7 +27,7 @@ function PopUpBar(props) {
         // onHide={() => setVisible(false)} Disabled because it closes the popup when moving around map!
         visible={visible}
       >
-        {recordData.name && (
+        {
           <div className="divClass">
             <button
               id="xButton"
@@ -39,7 +39,7 @@ function PopUpBar(props) {
               X
             </button>
           </div>
-        )}
+        }
 
         {/* {console.log("This is recordData ", recordData)} */}
         {recordData.name && (
@@ -92,8 +92,10 @@ function PopUpBar(props) {
                 </li>
               </div>
               <Carousel
-                imageItems={recordData.fields}
+                data={recordData.fields}
                 popUpActive={popUpActive}
+                visible={visible}
+                recordData={recordData}
               />
             </div>
           </div>
