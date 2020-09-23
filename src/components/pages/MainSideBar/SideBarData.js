@@ -36,7 +36,7 @@ export const NavBarData = [
   },
   {
     title: 'Log Out',
-    path: '/logout',
+    path: '/login',
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: 'logout-text',
   },
