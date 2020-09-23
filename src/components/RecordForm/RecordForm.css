@@ -20,20 +20,16 @@
 
 .waypointAddForm {
   width: 350px;
-  height: 500px;
+  height: 350px;
   display: flex;
   justify-content: flex-start;
   flex-flow: column wrap;
 }
 
 .addRecordLabeldiv {
-  margin: auto;
-  margin-top: 0%;
-  margin-bottom: 0%;
   display: flex;
   width: 100%;
-  height: 340px;
-  padding: auto 10%;
+  height: 240px;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
@@ -41,13 +37,12 @@
 
 
 .dropdown {
-  /* margin: auto; */
   border: .5px solid black;
 }
 
 .waypointUpdateForm {
   width: 350px;
-  height: 45vh;
+  height: 300px;
   display: flex;
   justify-content: flex-start;
   flex-flow: column wrap;
@@ -57,16 +52,15 @@
   width: 75%;
   display: flex;
   justify-content: space-around;
+}
 
+.FirstUpdateInput {
+  margin-top: 10%;
+  width: 100%;
 }
 
 select {
   width: 170px;
-}
-
-.FirstUpdateInput {
-  margin-top: 20%;
-  width: 100%;
 }
 
 .waypointDeleteForm {
@@ -96,9 +90,19 @@ select {
 
 .addWaypointButton {
   cursor: pointer;
-  width: 90%;
+  /* margin-top: 5%; */
   padding: 3%;
-  margin: auto;
+  background: #3BB54A;
+  color: #fff;
+  font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  border: solid 2px white;
+}
+
+.updateWaypointButton {
+  cursor: pointer;
+  margin-top: 8%;
+  padding: 3%;
   background: #3BB54A;
   color: #fff;
   font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
@@ -136,10 +140,19 @@ select {
 }
 
 .y-n-del-button {
+  cursor: pointer;
   width: 20%;
   background: #3BB54A;
   color: #fff;
+  font-size: 1.6rem;
   font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
   border-radius: 5px;
   border: solid 2px white;
+  padding: .7%;
+}
+
+#yesButton {
+  cursor: pointer;
+  margin-right: 25px;
+  background: #C84E47;
 }

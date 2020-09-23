@@ -67,7 +67,7 @@ function Row(props) {
         <TableCell align="center">{row.type.name}</TableCell>
         <TableCell align="center">{row.coordinates.latitude}</TableCell>
         <TableCell align="center">{row.coordinates.longitude}</TableCell>
-        <TableCell>
+        <TableCell align="center">
           <EditIcon
             style={{ color: '#3BB54A', cursor: 'pointer' }}
             onClick={() => {
@@ -151,7 +151,7 @@ const RecordForm = () => {
     name: '',
     typeId: '',
     coordinates: { latitude: 0, longitude: 0 },
-    fields: [{ name: '', value: '' }],
+    fields: [],
   });
 
   const [openUpdate, setOpenUpdate] = useState(false);
@@ -159,7 +159,7 @@ const RecordForm = () => {
     id: '',
     name: '',
     coordinates: { latitude: 0, longitude: 0 },
-    // fields: [],
+    fields: [],
   });
 
   const [openDelete, setOpenDelete] = useState(false);
@@ -211,7 +211,7 @@ const RecordForm = () => {
         latitude: parseFloat(event.target.value),
         longitude: parseFloat(recordData.coordinates.longitude),
       },
-      // fields: [],
+      fields: [],
     });
   };
   // Handles changes for Longitude specifically
@@ -222,7 +222,7 @@ const RecordForm = () => {
         latitude: parseFloat(recordData.coordinates.latitude),
         longitude: parseFloat(event.target.value),
       },
-      // fields: [],
+      fields: [],
     });
   };
 
@@ -241,7 +241,7 @@ const RecordForm = () => {
         latitude: parseFloat(event.target.value),
         longitude: parseFloat(recordUpdateData.coordinates.longitude),
       },
-      // fields: [],
+      fields: [],
     });
   };
   // Handles changes for updating Longitude specifically
@@ -252,7 +252,7 @@ const RecordForm = () => {
         latitude: parseFloat(recordUpdateData.coordinates.latitude),
         longitude: parseFloat(event.target.value),
       },
-      // fields: [],
+      fields: [],
     });
   };
 
@@ -263,7 +263,7 @@ const RecordForm = () => {
         name: recordData.name,
         typeId: recordData.typeId,
         coordinates: recordData.coordinates,
-        fields: recordData.fields,
+        fields: [],
       },
     });
     onCloseAddModal();
@@ -280,7 +280,7 @@ const RecordForm = () => {
           latitude: recordUpdateData.coordinates.latitude,
           longitude: recordUpdateData.coordinates.longitude,
         },
-        fields: recordUpdateData.fields,
+        fields: [],
       },
     });
     onCloseUpdateModal();
@@ -323,11 +323,13 @@ const RecordForm = () => {
               <TableRow>
                 <TableCell />
                 <TableCell style={{ fontWeight: '900' }}>NAME</TableCell>
-                <TableCell style={{ fontWeight: '900' }}>TYPE</TableCell>
-                <TableCell style={{ fontWeight: '900' }}>
+                <TableCell align="center" style={{ fontWeight: '900' }}>
+                  TYPE
+                </TableCell>
+                <TableCell align="center" style={{ fontWeight: '900' }}>
                   LATITUDE&nbsp;
                 </TableCell>
-                <TableCell style={{ fontWeight: '900' }}>
+                <TableCell align="center" style={{ fontWeight: '900' }}>
                   LONGITUDE&nbsp;
                 </TableCell>
                 <TableCell style={{ fontWeight: '900' }} colSpan="2">
@@ -369,7 +371,9 @@ const RecordForm = () => {
               onAddSubmit(e);
             }}
           >
-            <h3 className="title">Add Record</h3>
+            <h2 className="title" style={{ marginTop: '10px' }}>
+              Add Record
+            </h2>
             <div className="addRecordLabeldiv">
               <label className="FirstAddInput">
                 <span>Name:&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -428,7 +432,9 @@ const RecordForm = () => {
               onUpdateSubmit(e);
             }}
           >
-            <h3 className="title">Update Record</h3>
+            <h2 className="title" style={{ marginTop: '10px' }}>
+              Update Record
+            </h2>
             <label className="FirstUpdateInput">
               <span>Name:&nbsp;&nbsp;&nbsp;&nbsp;</span>
               <input
@@ -459,7 +465,7 @@ const RecordForm = () => {
                 onChange={event => handleLongitudeUpdateChange(event)}
               />
             </label>
-            <button className="waypointButton" type="submit">
+            <button className="updateWaypointButton" type="submit">
               {' '}
               Update Record
             </button>
@@ -476,7 +482,7 @@ const RecordForm = () => {
           >
             <h3 className="title">Delete Record</h3>
             <h1>Are you sure you want to delete this record?</h1>
-            <button className="y-n-del-button" type="submit">
+            <button className="y-n-del-button" id="yesButton" type="submit">
               Yes
             </button>
             <button className="y-n-del-button">No</button>

@@ -78,8 +78,10 @@ const TypeManagement = () => {
     console.log('This is type data: ', typeData);
     createNewType({
       variables: {
+        id: typeData.id,
         name: typeData.name,
-        fields: typeData.fields,
+        fields: [],
+        records: [],
       },
     });
     onCloseAddModal();
@@ -92,7 +94,7 @@ const TypeManagement = () => {
       variables: {
         id: typeUpdateData.id,
         name: typeUpdateData.name,
-        fields: typeUpdateData.fields,
+        fields: [],
         records: [],
       },
     });
@@ -185,7 +187,7 @@ const TypeManagement = () => {
         >
           <h3 className="title">Delete Record</h3>
           <h1>Are you sure you want to delete this record?</h1>
-          <button className="y-n-del-button" type="submit">
+          <button className="y-n-del-button" id="yesButton" type="submit">
             Yes
           </button>
           <button className="y-n-del-button">No</button>
@@ -220,7 +222,11 @@ const TypeManagement = () => {
                 </button>
                 <button
                   className="button-delete"
-                  onClick={e => onOpenDeleteModal()}
+                  onClick={() => {
+                    setDeleteTypeData(type);
+                    console.log(deleteTypeData);
+                    onOpenDeleteModal();
+                  }}
                 >
                   Delete
                 </button>

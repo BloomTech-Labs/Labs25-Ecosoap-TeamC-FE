@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
-import { useQuery, useMutation, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import PopUpBar from '../..//PopUpBar/PopUpBar';
 import { GET_RECORDS } from '../../records/RecordModification.js';
@@ -14,7 +14,7 @@ mapboxgl.accessToken =
 
 function Map() {
   const [currentMarker, setCurrentMarker] = useState(false);
-  const { loading, error, data } = useQuery(GET_RECORDS);
+  const { data } = useQuery(GET_RECORDS);
 
   useEffect(() => {
     // Snippet below is to initialize the map
@@ -58,13 +58,6 @@ function Map() {
       map.flyTo({
         center: [marker.coordinates.longitude, marker.coordinates.latitude],
         zoom: 6,
-      });
-    }
-
-    function flyBackPoint(marker) {
-      map.flyTo({
-        center: [35, 25],
-        zoom: 2,
       });
     }
 

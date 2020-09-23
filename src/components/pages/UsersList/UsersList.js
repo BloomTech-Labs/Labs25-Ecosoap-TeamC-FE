@@ -33,7 +33,7 @@ const UsersList = () => {
 
   const [openDelete, setOpenDelete] = useState(false);
   const [deleteUserData, setDeleteUserData] = useState({
-    id: '',
+    email: '',
   });
 
   // Form Authenticator below
@@ -54,6 +54,14 @@ const UsersList = () => {
     e.preventDefault();
     deleteAdmin({
       variables: { email: email },
+    });
+  };
+
+  const handleDeleteChange = event => {
+    console.log(deleteUserData);
+    setDeleteUserData({
+      ...deleteUserData,
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -90,7 +98,7 @@ const UsersList = () => {
   const onDeleteSubmit = e => {
     e.preventDefault();
     deleteUser({
-      variables: { id: deleteUserData },
+      variables: { email: deleteUserData },
     });
     onCloseDeleteModal();
   };
@@ -104,7 +112,7 @@ const UsersList = () => {
   };
 
   const [deleteUser, { mutData3 }] = useMutation(DELETE_USER, {
-    refetchQueries: ['getRecords'],
+    refetchQueries: ['getUsers'],
   });
 
   // Handles the form submit
@@ -133,8 +141,12 @@ const UsersList = () => {
           )}
           <Modal open={open} onClose={onCloseModal} center>
             <h1>Edit user: </h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <label>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="modify-user-modal"
+            >
+              <label className="user-update">
+                <span>Email:&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <input
                   placeholder="E-mail*"
                   type="text"
@@ -149,7 +161,8 @@ const UsersList = () => {
               </label>
               <br />
 
-              <label>
+              <label className="user-update">
+                <span>Password:&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <input
                   placeholder="Password*"
                   type="text"
@@ -164,7 +177,11 @@ const UsersList = () => {
               </label>
               <br />
 
-              <input type="submit" value="Update Admin" />
+              <input
+                type="submit"
+                className="addWaypointButton"
+                value="Update Admin"
+              />
             </form>
           </Modal>
 
@@ -177,7 +194,7 @@ const UsersList = () => {
             >
               <h3 className="title">Delete Record</h3>
               <h1>Are you sure you want to delete this record?</h1>
-              <button className="y-n-del-button" type="submit">
+              <button className="y-n-del-button" id="yesButton" type="submit">
                 Yes
               </button>
               <button className="y-n-del-button">No</button>
@@ -196,7 +213,11 @@ const UsersList = () => {
                 </button>
                 <button
                   className="button-delete"
-                  onClick={e => onOpenDeleteModal()}
+                  onClick={() => {
+                    setDeleteUserData(email);
+                    console.log(deleteUserData);
+                    onOpenDeleteModal();
+                  }}
                 >
                   Delete
                 </button>
