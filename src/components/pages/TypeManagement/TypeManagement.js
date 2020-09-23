@@ -59,7 +59,6 @@ const TypeManagement = () => {
   };
 
   const handleChange = event => {
-    console.log(typeData);
     setTypeData({
       ...typeData,
       [event.target.name]: event.target.value,
@@ -67,7 +66,6 @@ const TypeManagement = () => {
   };
 
   const handleUpdateChange = event => {
-    console.log(typeUpdateData);
     setTypeUpdateData({
       ...typeUpdateData,
       [event.target.name]: event.target.value,
@@ -75,7 +73,6 @@ const TypeManagement = () => {
   };
   const onAddSubmit = e => {
     e.preventDefault();
-    console.log('This is type data: ', typeData);
     createNewType({
       variables: {
         id: typeData.id,
@@ -89,7 +86,6 @@ const TypeManagement = () => {
 
   const onUpdateSubmit = e => {
     e.preventDefault();
-    console.log('This is type data: ', typeUpdateData);
     updateType({
       variables: {
         id: typeUpdateData.id,
@@ -103,7 +99,6 @@ const TypeManagement = () => {
 
   const onDeleteSubmit = e => {
     e.preventDefault();
-    console.log('This is type data: ', deleteTypeData);
     deleteType({
       variables: { id: deleteTypeData.id },
     });
@@ -212,7 +207,6 @@ const TypeManagement = () => {
                 <p>{`Type Name: ${type.name}`}</p>
                 <button
                   onClick={() => {
-                    console.log('THISIS TYPE', type);
                     setTypeUpdateData(type);
                     onOpenUpdateModal();
                   }}
@@ -224,7 +218,6 @@ const TypeManagement = () => {
                   className="button-delete"
                   onClick={() => {
                     setDeleteTypeData(type);
-                    console.log(deleteTypeData);
                     onOpenDeleteModal();
                   }}
                 >

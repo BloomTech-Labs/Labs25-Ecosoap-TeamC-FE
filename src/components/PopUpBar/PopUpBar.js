@@ -15,7 +15,6 @@ function PopUpBar(props) {
 
   useEffect(() => {
     setVisible(true);
-    console.log('Inside useEffect ', recordData);
   }, [recordData]);
 
   return (
@@ -41,7 +40,6 @@ function PopUpBar(props) {
           </div>
         }
 
-        {/* {console.log("This is recordData ", recordData)} */}
         {recordData.name && (
           <div className="bigDiv">
             <div className="recordDiv">

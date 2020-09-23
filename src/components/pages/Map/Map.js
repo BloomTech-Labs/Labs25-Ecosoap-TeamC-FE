@@ -34,15 +34,6 @@ function Map() {
     );
     /*-------------- Inside Search-Bar functionality END --------------*/
 
-    /*-------------- Outside Search-Bar functionality START --------------*/
-    // var geocoder = new MapboxGeocoder({
-    //   accessToken: mapboxgl.accessToken,
-    //   mapboxgl: mapboxgl,
-    // });
-    // geocoder.onAdd(map);
-    // geocoder.addTo('.geocoder');
-    /*-------------- Outside Search-Bar functionality END --------------*/
-
     /*-------------- Track user functionality START --------------*/
     map.addControl(
       new mapboxgl.GeolocateControl({
@@ -63,12 +54,10 @@ function Map() {
 
     data &&
       data.records.forEach(marker => {
-        // console.log('map records: ', data.records);
         var el = document.createElement('img');
         el.src = icon;
         el.className = 'markerStyles';
         el.onclick = () => {
-          // console.log("hi ", marker.name);
           setCurrentMarker(marker);
           flyToPoint(marker);
         };
@@ -88,7 +77,6 @@ function Map() {
 
   return (
     <>
-      {/* <div className="geocoder" /> */}
       <div id="map" />
       <PopUpBar recordData={currentMarker} />
     </>
