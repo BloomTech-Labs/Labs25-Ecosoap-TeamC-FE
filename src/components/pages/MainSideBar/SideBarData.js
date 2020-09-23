@@ -7,7 +7,19 @@ export const NavBarData = [
   {
     title: 'Admin Dashboard',
     path: '/dashboard',
-    icon: <FaIcons.FaCircle />,
+    icon: <FaIcons.FaSort />,
+    cName: 'nav-text',
+  },
+  {
+    title: 'Map Management',
+    path: '/map-management',
+    icon: <FaIcons.FaRegMap />,
+    cName: 'nav-text',
+  },
+  {
+    title: 'Type Management',
+    path: '/types',
+    icon: <IoIcons.IoMdSettings />,
     cName: 'nav-text',
   },
   {
@@ -20,18 +32,6 @@ export const NavBarData = [
     title: 'Manage Users',
     path: '/users',
     icon: <IoIcons.IoMdPeople />,
-    cName: 'nav-text',
-  },
-  {
-    title: 'Map Management',
-    path: '/manage-waypoints',
-    icon: <FaIcons.FaRegMap />,
-    cName: 'nav-text',
-  },
-  {
-    title: 'Settings',
-    path: '/settings',
-    icon: <IoIcons.IoMdSettings />,
     cName: 'nav-text',
   },
   {
