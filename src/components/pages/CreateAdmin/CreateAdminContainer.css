@@ -5,14 +5,9 @@
 }
 
 .error {
+  margin: auto;
+  margin-top: 5%;
   color: red;
-  position: absolute;
-  z-index: 10;
-  width: 25%;
-  display: flex;
-  justify-content: center;
-  margin-left: 25%;
-  border: 1px solid black;
 }
 
 .formContainer {
@@ -63,6 +58,7 @@
 }
 
 .submitButton {
+  cursor: pointer;
   background: #3bb54a;
   color: #fff;
   font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
