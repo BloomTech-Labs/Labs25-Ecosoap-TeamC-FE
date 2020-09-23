@@ -1,21 +1,26 @@
+.Type-Man-Page {
+  margin-top: 2%;
+  padding-left: 200px;
+}
+
 .typeButton {
-    margin-top: 20%;
-    text-decoration-color: initial;
-    background-image: initial;
-    background-color: rgb(47, 145, 59);
-    color: rgb(232, 230, 227);
+  margin-top: 20%;
+  text-decoration-color: initial;
+  background-image: initial;
+  background-color: rgb(47, 145, 59);
+  color: rgb(232, 230, 227);
 }
 
 .DeleteForm {
-    width: 70%;
-    height: 20vh;
-    display: flex;
-    justify-content: flex-start;
-    flex-flow: column wrap;
+  width: 70%;
+  height: 20vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: column wrap;
 }
   
-  .DeleteInput {
-    margin-top: 20%;
+.DeleteInput {
+  margin-top: 20%;
 }
 
 .page {
@@ -24,34 +29,34 @@
 }
 
 .types-form {
-    margin: 2% 0%;
-    width: 25%;
-    display: flex;
-    flex-flow: column wrap;
-    border: 1px solid black;
-    border-radius: 5px;
-    box-shadow: 2px 2px 10px 5px #3BB54A;
+  margin: 2% 0%;
+  width: 25%;
+  display: flex;
+  flex-flow: column wrap;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 2px 2px 10px 5px #3BB54A;
 }
 
 .type-card {
-    padding: 5%;
-    font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
-    text-align: center;
-    border: 1px solid black;
+  padding: 5%;
+  font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
+  text-align: center;
+  border: 1px solid black;
 }
 
 .button-modify {
-    background: #3BB54A;
-    color: #fff;
-    font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
-    border-radius: 5px;
-    border: solid 2px white;
+  background: #3BB54A;
+  color: #fff;
+  font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  border: solid 2px white;
 }
 
 .button-delete {
-    background: #3BB54A;
-    color: #fff;
-    font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
-    border-radius: 5px;
-    border: solid 2px white;
+  background: #3BB54A;
+  color: #fff;
+  font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  border: solid 2px white;
 }

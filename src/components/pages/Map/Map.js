@@ -15,7 +15,6 @@ mapboxgl.accessToken =
 function Map() {
   const [currentMarker, setCurrentMarker] = useState(false);
   const { loading, error, data } = useQuery(GET_RECORDS);
-  console.log(data);
 
   useEffect(() => {
     // Snippet below is to initialize the map
@@ -58,7 +57,7 @@ function Map() {
     function flyToPoint(marker) {
       map.flyTo({
         center: [marker.coordinates.longitude, marker.coordinates.latitude],
-        zoom: 13,
+        zoom: 6,
       });
     }
 

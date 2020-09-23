@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Checkbox, Sidebar } from 'semantic-ui-react';
+import { Sidebar } from 'semantic-ui-react';
 import Carousel from '../Carousel/Carousel';
 
 import './PopUpBar.css';
@@ -92,8 +92,10 @@ function PopUpBar(props) {
                 </li>
               </div>
               <Carousel
-                imageItems={recordData.fields}
+                data={recordData.fields}
                 popUpActive={popUpActive}
+                visible={visible}
+                recordData={recordData}
               />
             </div>
           </div>

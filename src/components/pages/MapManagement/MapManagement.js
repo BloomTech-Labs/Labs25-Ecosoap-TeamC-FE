@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
 import { Modal } from 'react-responsive-modal';
-import { useQuery, useMutation, gql } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import {
   NEW_RECORD,
   UPDATE_RECORD,
   DELETE_RECORD,
+  GET_RECORDS,
 } from '../../records/RecordModification.js';
 import { GET_TYPES } from '../../types/TypeModification.js';
 
@@ -18,7 +18,7 @@ const MapManagement = () => {
     name: '',
     typeId: '',
     coordinates: { latitude: 0, longitude: 0 },
-    fields: [],
+    fields: [{ name: '', value: '' }],
   });
 
   const [openUpdate, setOpenUpdate] = useState(false);
@@ -26,7 +26,7 @@ const MapManagement = () => {
     id: '',
     name: '',
     coordinates: { latitude: 0, longitude: 0 },
-    fields: [],
+    // fields: [],
   });
 
   const [openDelete, setOpenDelete] = useState(false);
@@ -65,7 +65,6 @@ const MapManagement = () => {
   };
 
   const handleChange = event => {
-    console.log(recordData);
     setRecordData({
       ...recordData,
       [event.target.name]: event.target.value,
@@ -73,14 +72,13 @@ const MapManagement = () => {
   };
   // Handles changes for Latitude specifically
   const handleLatitudeChange = event => {
-    console.log('handleLatitudeChange: ', recordData);
     setRecordData({
       ...recordData,
       coordinates: {
         latitude: parseFloat(event.target.value),
         longitude: parseFloat(recordData.coordinates.longitude),
       },
-      fields: [],
+      // fields: [],
     });
   };
   // Handles changes for Longitude specifically
@@ -91,30 +89,29 @@ const MapManagement = () => {
         latitude: parseFloat(recordData.coordinates.latitude),
         longitude: parseFloat(event.target.value),
       },
-      fields: [],
+      // fields: [],
     });
   };
 
   const handleUpdateChange = event => {
-    console.log(recordUpdateData);
+    console.log('Record Update Data: ', recordUpdateData);
     setRecordUpdateData({
       ...recordUpdateData,
       [event.target.name]: event.target.value,
     });
   };
-  // Handles changes for Latitude specifically
+  // Handles changes for updating Latitude specifically
   const handleLatitudeUpdateChange = event => {
-    console.log('handleLatitudeChange: ', recordUpdateData);
     setRecordUpdateData({
       ...recordUpdateData,
       coordinates: {
         latitude: parseFloat(event.target.value),
         longitude: parseFloat(recordUpdateData.coordinates.longitude),
       },
-      fields: [],
+      // fields: [],
     });
   };
-  // Handles changes for Longitude specifically
+  // Handles changes for updating Longitude specifically
   const handleLongitudeUpdateChange = event => {
     setRecordUpdateData({
       ...recordUpdateData,
@@ -122,21 +119,12 @@ const MapManagement = () => {
         latitude: parseFloat(recordUpdateData.coordinates.latitude),
         longitude: parseFloat(event.target.value),
       },
-      fields: [],
-    });
-  };
-
-  const handleDeleteChange = event => {
-    console.log(deleteRecordData);
-    setDeleteRecordData({
-      ...deleteRecordData,
-      [event.target.name]: event.target.value,
+      // fields: [],
     });
   };
 
   const onAddSubmit = e => {
     e.preventDefault();
-    console.log('This is record data: ', recordData);
     registerNewRecord({
       variables: {
         name: recordData.name,
@@ -145,47 +133,49 @@ const MapManagement = () => {
         fields: recordData.fields,
       },
     });
-
-    // Line below can be added, if we want to CLOSE the form when Admin updates user, but this will conflict a bit with
     onCloseAddModal();
   };
 
   const onUpdateSubmit = e => {
     e.preventDefault();
-    console.log('This is record data: ', recordUpdateData);
+    console.log('THIS IS recordUpdateData', recordUpdateData);
     updateRecord({
       variables: {
         id: recordUpdateData.id,
         name: recordUpdateData.name,
-        coordinates: recordUpdateData.coordinates,
+        coordinates: {
+          latitude: recordUpdateData.coordinates.latitude,
+          longitude: recordUpdateData.coordinates.longitude,
+        },
         fields: recordUpdateData.fields,
       },
     });
-
-    // Line below can be added, if we want to CLOSE the form when Admin updates user, but this will conflict a bit with
     onCloseUpdateModal();
   };
 
   const onDeleteSubmit = e => {
     e.preventDefault();
-    console.log('This is record data: ', deleteRecordData);
     deleteRecord({
       variables: { id: deleteRecordData.id },
     });
-
-    // Line below can be added, if we want to CLOSE the form when Admin updates user, but this will conflict a bit with
     onCloseDeleteModal();
   };
-  const { loading, error, data } = useQuery(GET_TYPES);
-  console.log(data);
+
+  const { data: queryData } = useQuery(GET_TYPES);
+  const { loading, error, data: recordQuery } = useQuery(GET_RECORDS);
+
   const [registerNewRecord, { mutData }] = useMutation(NEW_RECORD, {
-    refetchQueries: ['getTypes'],
+    refetchQueries: ['getRecords'],
   });
-  const [updateRecord, { mutData2 }] = useMutation(UPDATE_RECORD);
-  const [deleteRecord, { mutData3 }] = useMutation(DELETE_RECORD);
+  const [updateRecord, { mutData2 }] = useMutation(UPDATE_RECORD, {
+    refetchQueries: ['getRecords'],
+  });
+  const [deleteRecord, { mutData3 }] = useMutation(DELETE_RECORD, {
+    refetchQueries: ['getRecords'],
+  });
 
   return (
-    <div>
+    <div className="Map-Man-Page">
       <h1>Map Management</h1>
       {/* Modal for adding a new record */}
       <Modal open={openAdd} onClose={onCloseAddModal} center>
@@ -202,7 +192,6 @@ const MapManagement = () => {
               type="text"
               name="name"
               onChange={event => handleChange(event)}
-              // ref={register}
             />
           </label>
           <select
@@ -211,8 +200,8 @@ const MapManagement = () => {
             onChange={event => handleChange(event)}
           >
             <option label="Select a type:" />
-            {data &&
-              data.types.map(({ id, name }) => (
+            {queryData &&
+              queryData.types.map(({ id, name }) => (
                 <option value={id}>{name}</option>
               ))}
           </select>
@@ -222,7 +211,6 @@ const MapManagement = () => {
               type="float"
               name="latitude"
               onChange={event => handleLatitudeChange(event)}
-              // ref={register}
             />
           </label>
           <label className="FirstAddInput">
@@ -231,7 +219,6 @@ const MapManagement = () => {
               type="float"
               name="longitude"
               onChange={event => handleLongitudeChange(event)}
-              // ref={register}
             />
           </label>
           <button className="waypointButton" type="submit">
@@ -255,8 +242,8 @@ const MapManagement = () => {
               placeholder="Location ID"
               type="text"
               name="id"
+              value={recordUpdateData.id}
               onChange={event => handleUpdateChange(event)}
-              // ref={register}
             />
           </label>
           <label className="FirstUpdateInput">
@@ -264,17 +251,8 @@ const MapManagement = () => {
               placeholder="Location Name"
               type="text"
               name="name"
+              value={recordUpdateData.name}
               onChange={event => handleUpdateChange(event)}
-              // ref={register}
-            />
-          </label>
-          <label className="FirstUpdateInput">
-            <input
-              placeholder="Latitude"
-              type="text"
-              name="latitude"
-              onChange={event => handleLatitudeUpdateChange(event)}
-              // ref={register}
             />
           </label>
           <label className="FirstUpdateInput">
@@ -282,8 +260,17 @@ const MapManagement = () => {
               placeholder="Longitude"
               type="text"
               name="longitude"
+              value={recordUpdateData.coordinates.longitude}
               onChange={event => handleLongitudeUpdateChange(event)}
-              // ref={register}
+            />
+          </label>
+          <label className="FirstUpdateInput">
+            <input
+              placeholder="Latitude"
+              type="text"
+              name="latitude"
+              value={recordUpdateData.coordinates.latitude}
+              onChange={event => handleLatitudeUpdateChange(event)}
             />
           </label>
           <button className="waypointButton" type="submit">
@@ -302,33 +289,49 @@ const MapManagement = () => {
           }}
         >
           <h3 className="title">Delete Record</h3>
-          <label className="FirstDeleteInput">
-            <input
-              placeholder="Location to delete"
-              type="text"
-              name="id"
-              onChange={event => handleDeleteChange(event)}
-              // ref={register}
-            />
-          </label>
+          <h1>Are you sure you want to delete this record?</h1>
           <button className="waypointButton" type="submit">
-            {' '}
-            Delete Record
+            Yes
           </button>
+          <button className="waypointButton">No</button>
         </form>
       </Modal>
-      <button onClick={e => onOpenAddModal()} className="button-modify">
+      <button onClick={e => onOpenAddModal()} className="button-modify-new">
         Add New Record
       </button>
-      <button onClick={e => onOpenUpdateModal()} className="button-modify">
-        Update Existing Record
-      </button>
-      <button onClick={e => onOpenDeleteModal()} className="button-modify">
-        Delete Record
-      </button>
-      <p className="goBackLink">
-        Back to <Link to="/dashboard">Dashboard</Link>
-      </p>
+      <div className="records-form">
+        {loading && <p>Loading...</p>}
+        {error && (
+          <p>We're experiencing errors with the API! Please come back later.</p>
+        )}
+        {recordQuery &&
+          recordQuery.records.map(record => (
+            <div className="record-card" key={record.id}>
+              <p>{`Type ID: ${record.id}`}</p>
+              <p>{`Record Name: ${record.name}`}</p>
+              <p>{`Type: ${record.type.name}`}</p>
+              <p>{`Coordinates (Long/Lat): ${record.coordinates.longitude}, ${record.coordinates.latitude}`}</p>
+              <button
+                className="button-modify"
+                onClick={e => {
+                  onOpenUpdateModal();
+                  setRecordUpdateData(record);
+                }}
+              >
+                Modify
+              </button>
+              <button
+                className="button-delete"
+                onClick={e => {
+                  onOpenDeleteModal();
+                  setDeleteRecordData({ id: record.id });
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          ))}
+      </div>
     </div>
   );
 };

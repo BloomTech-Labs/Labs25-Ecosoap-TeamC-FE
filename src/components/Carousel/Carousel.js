@@ -1,39 +1,50 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import ReactPlayer from 'react-player/lazy';
 
 import 'react-alice-carousel/lib/alice-carousel.css';
 import './Carousel.css';
 
-const images = [
-  'https://i.imgur.com/VTpz8XB.jpg',
-  'https://i.imgur.com/nff0PWy.jpg',
-  'https://i.imgur.com/fY311wc.jpeg',
-  'https://i.imgur.com/BaGeu7F.jpeg',
-  'https://i.imgur.com/rc9nH0R.jpeg',
-  'https://i.imgur.com/xnoLgTy.jpeg',
-];
+const images = [];
 
 const videos = [
+  'https://www.youtube.com/watch?v=jj_vBgYxSUE',
+  'https://www.youtube.com/watch?v=VQAEbyBeDBM',
+  'https://www.youtube.com/watch?v=lz0UHj18iaQ',
+  'https://www.youtube.com/watch?v=8uNf3Fmzas8',
   'https://www.youtube.com/watch?v=5Y0CaCn-hd8',
-  'https://www.youtube.com/watch?v=C6ZqJ-5v3o4&list=LL9DN5AIo4LNrmpHHpXVFwtw&index=13&t=0s',
-  'https://www.youtube.com/watch?v=KmlMQtMkywo&list=LL9DN5AIo4LNrmpHHpXVFwtw&index=7&t=0s',
-  'https://www.youtube.com/watch?v=gwVb1nLPBkA&list=LL9DN5AIo4LNrmpHHpXVFwtw&index=8&t=215s',
-  'https://www.youtube.com/watch?v=rtDNjrffsec',
 ];
 
 function Carousel(props) {
+  const [images, setImages] = useState([]);
+
   let Carousel = useRef();
   let SecondCarousel = useRef();
 
   useEffect(() => {
+    let galleryArray = props.data
+      .filter(image => image.name === 'Image')
+      .map(image => image.value);
+    setImages(galleryArray);
     // This code triggers the resize event on the browser and avoids image malfunction on the carousel.
     window.dispatchEvent(new Event('resize'));
-  }, [props.popUpActive]);
+  }, [props.popUpActive, props.visible, props.recordData]);
 
-  const galleryItems = images.map((image, index) => (
-    <img alt={`${index}`} className="mainImages" key={index + 20} src={image} />
-  ));
+  function moreThanOne() {
+    return images.length > 0
+      ? images.map((image, index) => (
+          <img
+            alt={`${index}`}
+            className="mainImages"
+            key={index + 20}
+            src={image}
+          />
+        ))
+      : // Do this if there's no images to display
+        setImages(['https://tinyurl.com/y5gxpb4b']);
+  }
+
+  const galleryItems = moreThanOne();
 
   const galleryVideos = videos.map((video, index) => (
     <div className="player-wrapper">

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import './CreateAdminContainer.css';
 import logo from '../../../media/eco-soap-logo.png';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { NEW_USER } from '../../users/UserModification.js';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';
@@ -59,41 +59,48 @@ const CreateUserForm = () => {
   };
 
   return (
-    <div className="formContainer">
-      <div>
-        <img className="eco-soap-logo" src={logo} alt="eco-soap bank logo" />
-      </div>
-      <div className="signUpForm">
-        <h1 className="title">Create a New Admin</h1>
+    <div className="Create-Admin-Page">
+      <div className="formContainer">
+        <div>
+          <img
+            className="eco-soap-logo-create"
+            src={logo}
+            alt="eco-soap bank logo"
+          />
+        </div>
+        <div className="signUpForm">
+          <h1 className="title">Create a new User</h1>
 
-        <form className="form" onSubmit={handleSubmit(onSubmit)}>
-          <label className="emailBox" htmlFor="email">
+          <form className="form" onSubmit={handleSubmit(onSubmit)}>
+            <label className="emailBox" htmlFor="email">
+              <input
+                placeholder="E-mail*"
+                type="text"
+                name="Email"
+                onChange={event => handleChange(event)}
+                ref={register}
+              />
+              {errors.Email && <p className="error">{errors.Email.message}</p>}
+            </label>
+            <label className="passwordBox" htmlFor="password">
+              <input
+                placeholder="Password*"
+                type="text"
+                name="Password"
+                onChange={event => handleChange(event)}
+                ref={register}
+              />
+              {errors.Password && (
+                <p className="error">{errors.Password.message}</p>
+              )}
+            </label>
             <input
-              placeholder="E-mail*"
-              type="text"
-              name="Email"
-              onChange={event => handleChange(event)}
-              ref={register}
+              className="submitButton"
+              type="submit"
+              value="Create Admin"
             />
-            {errors.Email && <p className="error">{errors.Email.message}</p>}
-          </label>
-          <label className="passwordBox" htmlFor="password">
-            <input
-              placeholder="Password*"
-              type="text"
-              name="Password"
-              onChange={event => handleChange(event)}
-              ref={register}
-            />
-            {errors.Password && (
-              <p className="error">{errors.Password.message}</p>
-            )}
-          </label>
-          <input className="submitButton" type="submit" value="Create Admin" />
-          <p className="goBackInCreate">
-            Back to <Link to="/dashboard">Dashboard</Link>
-          </p>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );

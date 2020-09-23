@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+// import { Link, useHistory } from 'react-router-dom';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import {
   GET_TYPES,
@@ -117,12 +117,18 @@ const TypeManagement = () => {
     onCloseDeleteModal();
   };
 
-  const [createNewType, { mutData }] = useMutation(ADD_TYPE);
-  const [updateType, { mutData2 }] = useMutation(UPDATE_TYPE);
-  const [deleteType, { mutData3 }] = useMutation(DELETE_TYPE);
+  const [createNewType, { mutData }] = useMutation(ADD_TYPE, {
+    refetchQueries: ['getTypes'],
+  });
+  const [updateType, { mutData2 }] = useMutation(UPDATE_TYPE, {
+    refetchQueries: ['getTypes'],
+  });
+  const [deleteType, { mutData3 }] = useMutation(DELETE_TYPE, {
+    refetchQueries: ['getTypes'],
+  });
 
   return (
-    <div>
+    <div className="Type-Man-Page">
       <h1>Types</h1>
       <Modal open={openAdd} onClose={onCloseAddModal} center>
         <form
@@ -206,41 +212,35 @@ const TypeManagement = () => {
       <button onClick={e => onOpenAddModal()} className="button-modify">
         Add New Type
       </button>
-      <button onClick={e => onOpenUpdateModal()} className="button-modify">
-        Update Existing Type
-      </button>
-      <button onClick={e => onOpenDeleteModal()} className="button-modify">
-        Delete Type
-      </button>
-      <div className="page"></div>
-      <div className="types-form">
-        {loading && <p>Loading...</p>}
-        {error && (
-          <p>We're experiencing errors with the API! Please come back later.</p>
-        )}
-        {data &&
-          data.types.map(({ id, name }) => (
-            <div className="type-card" key={id}>
-              <p>{`Type ID: ${id}`}</p>
-              <p>{`Type Name: ${name}`}</p>
-              <button
-                // onClick={e => onOpenModal(id, name)}
-                className="button-modify"
-              >
-                Modify
-              </button>
-              <button
-                className="button-delete"
-                // onClick={e => deleteFunc(e, id)}
-              >
-                Delete
-              </button>
-            </div>
-          ))}
+      <div className="page">
+        <div className="types-form">
+          {loading && <p>Loading...</p>}
+          {error && (
+            <p>
+              We're experiencing errors with the API! Please come back later.
+            </p>
+          )}
+          {data &&
+            data.types.map(({ id, name }) => (
+              <div className="type-card" key={id}>
+                <p>{`Type ID: ${id}`}</p>
+                <p>{`Type Name: ${name}`}</p>
+                <button
+                  onClick={e => onOpenUpdateModal()}
+                  className="button-modify"
+                >
+                  Modify
+                </button>
+                <button
+                  className="button-delete"
+                  onClick={e => onOpenDeleteModal()}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+        </div>
       </div>
-      <p className="goBackLink">
-        Back to <Link to="/dashboard">Dashboard</Link>
-      </p>
     </div>
   );
 };
