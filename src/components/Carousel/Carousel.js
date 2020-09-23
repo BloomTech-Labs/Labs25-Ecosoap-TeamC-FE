@@ -5,8 +5,6 @@ import ReactPlayer from 'react-player/lazy';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import './Carousel.css';
 
-const images = [];
-
 const videos = [
   'https://www.youtube.com/watch?v=jj_vBgYxSUE',
   'https://www.youtube.com/watch?v=VQAEbyBeDBM',
@@ -28,7 +26,7 @@ function Carousel(props) {
     setImages(galleryArray);
     // This code triggers the resize event on the browser and avoids image malfunction on the carousel.
     window.dispatchEvent(new Event('resize'));
-  }, [props.popUpActive, props.visible, props.recordData]);
+  }, [props.popUpActive, props.visible, props.recordData, props.data]);
 
   function moreThanOne() {
     return images.length > 0

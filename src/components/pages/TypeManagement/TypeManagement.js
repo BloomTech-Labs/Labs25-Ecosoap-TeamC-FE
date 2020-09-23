@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import { Link, useHistory } from 'react-router-dom';
-import { useQuery, useMutation, gql } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import {
   GET_TYPES,
   ADD_TYPE,
@@ -14,14 +14,14 @@ const TypeManagement = () => {
   const { loading, error, data } = useQuery(GET_TYPES);
   const [openAdd, setOpenAdd] = useState(false);
   const [typeData, setTypeData] = useState({
+    id: '',
     name: '',
-    fields: [],
   });
 
   const [openUpdate, setOpenUpdate] = useState(false);
   const [typeUpdateData, setTypeUpdateData] = useState({
-    name: '',
-    fields: [],
+    id: '',
+    name: [],
   });
 
   const [openDelete, setOpenDelete] = useState(false);
@@ -73,15 +73,6 @@ const TypeManagement = () => {
       [event.target.name]: event.target.value,
     });
   };
-
-  const handleDeleteChange = event => {
-    console.log(deleteTypeData);
-    setDeleteTypeData({
-      ...deleteTypeData,
-      [event.target.name]: event.target.value,
-    });
-  };
-
   const onAddSubmit = e => {
     e.preventDefault();
     console.log('This is type data: ', typeData);
@@ -129,6 +120,10 @@ const TypeManagement = () => {
 
   return (
     <div className="Type-Man-Page">
+      {loading && <p>Loading...</p>}
+      {error && (
+        <p>We're experiencing errors with the API! Please come back later.</p>
+      )}
       <h1>Types</h1>
       <Modal open={openAdd} onClose={onCloseAddModal} center>
         <form
@@ -139,6 +134,7 @@ const TypeManagement = () => {
         >
           <h3>Add Type</h3>
           <label className="FirstAddInput">
+            <span>Name:&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <input
               placeholder="Type Name"
               type="text"
@@ -163,19 +159,12 @@ const TypeManagement = () => {
         >
           <h3>Update Type</h3>
           <label className="FirstUpdateInput">
-            <input
-              placeholder="Type ID"
-              type="text"
-              name="id"
-              onChange={event => handleUpdateChange(event)}
-              // ref={register}
-            />
-          </label>
-          <label className="FirstUpdateInput">
+            <span>Name:&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <input
               placeholder="Type Name"
               type="text"
               name="name"
+              value={typeUpdateData.name}
               onChange={event => handleUpdateChange(event)}
               // ref={register}
             />
@@ -186,30 +175,24 @@ const TypeManagement = () => {
           </button>
         </form>
       </Modal>
+
       <Modal open={openDelete} onClose={onCloseDeleteModal} center>
         <form
-          className="DeleteForm"
+          className="delete-modal"
           onSubmit={e => {
             onDeleteSubmit(e);
           }}
         >
-          <h3>Delete Type</h3>
-          <label className="DeleteInput">
-            <input
-              placeholder="Type ID to Delete"
-              type="text"
-              name="id"
-              onChange={event => handleDeleteChange(event)}
-              // ref={register}
-            />
-          </label>
-          <button className="typeButton" type="submit">
-            {' '}
-            Delete Type
+          <h3 className="title">Delete Record</h3>
+          <h1>Are you sure you want to delete this record?</h1>
+          <button className="y-n-del-button" type="submit">
+            Yes
           </button>
+          <button className="y-n-del-button">No</button>
         </form>
       </Modal>
-      <button onClick={e => onOpenAddModal()} className="button-modify">
+
+      <button onClick={e => onOpenAddModal()} className="button-add-type">
         Add New Type
       </button>
       <div className="page">
@@ -221,12 +204,16 @@ const TypeManagement = () => {
             </p>
           )}
           {data &&
-            data.types.map(({ id, name }) => (
-              <div className="type-card" key={id}>
-                <p>{`Type ID: ${id}`}</p>
-                <p>{`Type Name: ${name}`}</p>
+            data.types.map(type => (
+              <div className="type-card" key={type.id}>
+                <p>{`Type ID: ${type.id}`}</p>
+                <p>{`Type Name: ${type.name}`}</p>
                 <button
-                  onClick={e => onOpenUpdateModal()}
+                  onClick={() => {
+                    console.log('THISIS TYPE', type);
+                    setTypeUpdateData(type);
+                    onOpenUpdateModal();
+                  }}
                   className="button-modify"
                 >
                   Modify

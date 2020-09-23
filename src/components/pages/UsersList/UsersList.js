@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './UsersList.css';
-import { useQuery, useMutation, gql } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import {
   GET_USERS,
   UPDATE_USER,
@@ -31,6 +31,11 @@ const UsersList = () => {
   const [open, setOpen] = useState(false);
   const [userInfo, setUserInfo] = useState('');
 
+  const [openDelete, setOpenDelete] = useState(false);
+  const [deleteUserData, setDeleteUserData] = useState({
+    id: '',
+  });
+
   // Form Authenticator below
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
@@ -44,6 +49,7 @@ const UsersList = () => {
     refetchQueries: ['getUsers'],
   });
   const { loading, error, data } = useQuery(GET_USERS);
+
   const deleteFunc = (e, email) => {
     e.preventDefault();
     deleteAdmin({
@@ -71,6 +77,24 @@ const UsersList = () => {
     setOpen(false);
   };
 
+  // Opens Delete Record Modal
+  const onOpenDeleteModal = () => {
+    setOpenDelete(true);
+  };
+
+  // Closes Delete Record Modal
+  const onCloseDeleteModal = () => {
+    setOpenDelete(false);
+  };
+
+  const onDeleteSubmit = e => {
+    e.preventDefault();
+    deleteUser({
+      variables: { id: deleteUserData },
+    });
+    onCloseDeleteModal();
+  };
+
   // Handles changes in the form
   const handleChange = event => {
     setUserInfo({
@@ -78,6 +102,10 @@ const UsersList = () => {
       [event.target.name]: event.target.value,
     });
   };
+
+  const [deleteUser, { mutData3 }] = useMutation(DELETE_USER, {
+    refetchQueries: ['getRecords'],
+  });
 
   // Handles the form submit
   const onSubmit = () => {
@@ -139,6 +167,22 @@ const UsersList = () => {
               <input type="submit" value="Update Admin" />
             </form>
           </Modal>
+
+          <Modal open={openDelete} onClose={onCloseDeleteModal} center>
+            <form
+              className="record-modal"
+              onSubmit={e => {
+                onDeleteSubmit(e);
+              }}
+            >
+              <h3 className="title">Delete Record</h3>
+              <h1>Are you sure you want to delete this record?</h1>
+              <button className="y-n-del-button" type="submit">
+                Yes
+              </button>
+              <button className="y-n-del-button">No</button>
+            </form>
+          </Modal>
           {data &&
             data.users.map(({ id, email, password }) => (
               <div className="user-card" key={id}>
@@ -152,7 +196,7 @@ const UsersList = () => {
                 </button>
                 <button
                   className="button-delete"
-                  onClick={e => deleteFunc(e, email)}
+                  onClick={e => onOpenDeleteModal()}
                 >
                   Delete
                 </button>

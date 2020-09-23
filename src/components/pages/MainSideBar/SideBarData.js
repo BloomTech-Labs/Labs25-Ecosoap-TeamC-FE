@@ -1,13 +1,13 @@
 import React from 'react';
 import * as FaIcons from 'react-icons/fa';
-// import * as AiIcons from 'react-icons/ai';
+import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 
 export const NavBarData = [
   {
     title: 'Admin Dashboard',
     path: '/dashboard',
-    icon: <FaIcons.FaSort />,
+    icon: <FaIcons.FaCircle />,
     cName: 'nav-text',
   },
   {

@@ -4,11 +4,19 @@
 }
 
 .typeButton {
-  margin-top: 20%;
-  text-decoration-color: initial;
-  background-image: initial;
-  background-color: rgb(47, 145, 59);
-  color: rgb(232, 230, 227);
+  background: #3BB54A;
+  color: #fff;
+  font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  border: solid 2px white;
+}
+
+.button-add-type {
+  background: #3BB54A;
+  color: #fff;
+  font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  border: solid 2px white;
 }
 
 .DeleteForm {
@@ -54,6 +62,34 @@
 }
 
 .button-delete {
+  background: #3BB54A;
+  color: #fff;
+  font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  border: solid 2px white;
+}
+
+.typeAddForm {
+  width: 75%;
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+}
+
+.typeUpdateForm {
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+}
+
+.typeDeleteForm {
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+}
+
+.y-n-del-button {
+  width: 20%;
   background: #3BB54A;
   color: #fff;
   font-family: proxima nova, montserrat, Arial, Helvetica, sans-serif;
