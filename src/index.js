@@ -30,7 +30,7 @@ import { TypeManagement } from './components/pages/TypeManagement';
 import './index.css';
 
 const client = new ApolloClient({
-  uri: 'http://35.208.9.187:9097/web-api-dev',
+  uri: 'http://35.208.9.187:9093/web-api-3',
   cache: new InMemoryCache(),
 });
 
