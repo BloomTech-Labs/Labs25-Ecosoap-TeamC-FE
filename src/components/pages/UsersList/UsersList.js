@@ -50,21 +50,6 @@ const UsersList = () => {
   });
   const { loading, error, data } = useQuery(GET_USERS);
 
-  const deleteFunc = (e, email) => {
-    e.preventDefault();
-    deleteAdmin({
-      variables: { email: email },
-    });
-  };
-
-  const handleDeleteChange = event => {
-    console.log(deleteUserData);
-    setDeleteUserData({
-      ...deleteUserData,
-      [event.target.name]: event.target.value,
-    });
-  };
-
   // Opens Form Modal
   const onOpenModal = (id, email, password) => {
     setUserInfo({
